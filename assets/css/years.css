@@ -25,15 +25,21 @@ body {
 }
 
 /* Styles pour l'en-tête */
-header {
-    background: no-repeat center/cover url(/assets/images/Backgroung-header.jpg);
-    height: 695px;
-    position: relative; /* Assurer que les éléments internes se positionnent correctement */
+.entete{
+    /* border: solid red 1px; */
+    margin-block: 8rem 6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+h1{
+    font-size: 4rem;
 }
 
 hr{
     border: solid 1px #FACA78;
-    margin-inline: 10%;
+    margin: 5% 10%;
 }
 
 /* Styles pour la barre de navigation */
@@ -199,51 +205,12 @@ hr{
     font-size: 1.5rem;
 }
 
-/* ********************bouton et titre header********* */
-.entete{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    /* border: red 1px solid; */
-    height: 92%;
-    padding-top: 4rem;
-}
-
-.entete h1 {
-    color: #FACA78; /* Couleur du titre */
-}
-
-.entete button{
-    border: none;
-    background-color: #EB7A57;
-    color: #FACA78;
-    height: 2.5rem;
-    width: 7rem;
-    padding-inline: 10px;
-    font-size: 18px;
-    margin-top: 10px;
-    cursor: pointer;
-    border-radius: 4px; 
-}
-
-.entete button:hover{
-    background-color: #E28B70;
-}
-
-.entete button a{
-    text-decoration: none;
-    color: inherit;
-}
-
-.entete button a:visited{
-    color: inherit;
-}
-
 /*****************carrousel***********/
 h2 {
-    font-size: 2rem;
-    margin: 20px;
+    font-size: 3rem;
+    margin: 2rem;
+    cursor: pointer;
+    font-weight: normal;
 }
 
 .carousel {
@@ -278,6 +245,7 @@ h2 {
     width: 100%; /* S'assure que l'image occupe toute la largeur de son conteneur */
     height: auto;
     border-radius: 5px;
+    cursor: pointer;
     transition: transform 0.3s ease-in-out; /* Ajoute une transition douce pour le zoom */
 }
 
@@ -325,21 +293,100 @@ h2 {
     ;
 }
 
-/* *****************plateformes******************* */
-.plateforms{
+/* ***************************carte pour les années spécifique**************** */
+/* styles.css */
+.grid-container {
     display: flex;
-    justify-content: center;
-    /* border: solid red 1px; */
-    flex-direction: column;
-    align-items: center;
-    /* margin-top: 3rem; */
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
-.plateforms h2{
-    /* border: blue 1px solid; */
-    height: fit-content;
-    width: fit-content;
+.card {
+    border-radius: 8px;
+    margin: 20px 10px;
+    max-width: 280px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    color: #FACA78;
 }
+
+.card img {
+    width: 100%;
+    height: 270px;
+    object-fit: cover;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out; 
+}
+
+.card img:hover{
+    transform: scale(1.1);
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.details-container {
+    display: none; /* Cacher par défaut */
+    position: fixed; /* Fixé à l'écran pour qu'il s'affiche au-dessus de tout */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+}
+
+.details-container img {
+    max-width: 40%;
+    border-radius: 10px;
+    margin-right: 20px;
+}
+
+.details-info h2, .details-info p {
+    margin: 5px 0;
+}
+
+.close-details {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+    color: white;
+}
+
+
+
+
+
+/* *****************affichage d'une div au clique************* */
+.details-container {
+    display: none; /* Caché par défaut */
+    background-color: rgba(0, 0, 0, 0.8); /* Noir avec un peu de transparence */
+    color: white;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.details-container img {
+    max-width: 40%; /* Ajuste la taille de l'image */
+    border-radius: 10px;
+    margin-right: 20px;
+}
+
+.details-info h2, .details-info p {
+    margin: 5px 0;
+}
+
+
 
 /* ************************footer********************* */
 footer {
@@ -382,8 +429,38 @@ footer p {
 }
 
 
-/* responsive mobile */
+.serie-card {
+    display: inline-block;
+    width: 150px;
+    margin: 10px;
+    text-align: center;
+}
+
+.serie-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+#series-list {
+    margin-top: 20px;
+}
+
+
 @media (max-width: 767px) {
+    .entete{
+        margin-block: 5rem 3rem;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+        /* margin-top: 10px; */
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+
     #menu ul, .account {
         display: none; /* Cache tous les éléments du menu */
     }
@@ -427,7 +504,6 @@ footer p {
         width: 100vw;
         padding: 10px 0;
         z-index: 1000;
-        text-align: center;
     }
 
     .tab-bar a {
@@ -441,54 +517,16 @@ footer p {
     }
 
     /* Other adjustments for responsive design */
-header{
-    height: 30vh;
-}
-
-    .entete h1 {
-        font-size: 1.3rem;
-        text-align: center;
-        padding: 0 1rem;
-    }
-
-    .entete button {
-        font-size: 0.7rem;
-        padding: 0.3rem;
-        width: 5rem;
-        height: 2rem;
-    }
-
-    .carousel{
-        width: 90%;
-    }
-
-    .carousel-slide {
-        flex: 0 0 100%; /* Affiche une image à la fois sur les petits écrans */
-    }
-
     .carousel-slide img {
         flex: 0 0 100%; /* Affiche une image à la fois sur les petits écrans */
-        width: 9rem;
-        height: 100%;        
+        width: 10rem;
+        /* height: 10vw;         */
     }
 
     .carousel-control {
         font-size: 2rem;
         left: 10;
         right: 10;
-    }
-
-    h2 {
-        font-size: 1.5rem;
-    }
-
-    .plateforms h2 {
-        font-size: 1.5rem;
-        text-align: center;
-    }
-
-    .plateforms img{
-        width: 100vw;
     }
 
     footer {
@@ -506,4 +544,3 @@ header{
         font-size: 1rem;
     }
 }
-
