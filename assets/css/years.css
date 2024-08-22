@@ -31,16 +31,28 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 
 h1{
     font-size: 4rem;
 }
 
+h3{
+    margin-top: 3rem;
+    font-size: 2rem;
+}
+
 hr{
     border: solid 1px #FACA78;
     margin: 5% 10%;
 }
+
+.tab-bar {
+    display: none;
+}   
+
+
 
 /* Styles pour la barre de navigation */
 #menu {
@@ -213,6 +225,12 @@ h2 {
     font-weight: normal;
 }
 
+a{
+    text-decoration: none;
+
+}
+
+
 .carousel {
     position: relative;
     width: 100%; /* La largeur du carrousel prend tout l'espace disponible */
@@ -227,15 +245,16 @@ h2 {
     display: flex;
     transition: transform 0.5s ease-in-out;
     will-change: transform;
-    width: 100%; /* Ajuste la largeur du conteneur pour qu'elle s'adapte à 100% du parent */
+    width: 60rem; 
+    /* Ajuste la largeur du conteneur pour qu'elle s'adapte à 100% du parent */
     margin-left: auto;
     margin-right: auto;
 }
 
 .carousel-slide {
     flex: 0 0 20%; /* 20% pour afficher 5 images */
-    box-sizing: border-box;
-    padding: 10px; /* Réduire le padding pour éviter le débordement */
+    /* box-sizing: border-box; */
+    padding: 5px; /* Réduire le padding pour éviter le débordement */
     display: flex;
     justify-content: center;
     margin: 0; /* Enlève les marges pour un alignement parfait */
@@ -247,6 +266,7 @@ h2 {
     border-radius: 5px;
     cursor: pointer;
     transition: transform 0.3s ease-in-out; /* Ajoute une transition douce pour le zoom */
+    /* border: red solid 1px; */
 }
 
 .carousel-slide:hover img {
@@ -265,8 +285,9 @@ h2 {
     top: 50%;
     transform: translateY(-50%);
     background-color: rgba(0, 0, 0, 0.615);
-    height: 20%;
-    width: 7%;
+    /* height: 40%; */
+    width: 5%;
+    /* padding-top: 10px; */
     border: none;
     color: #EB7A57;
     cursor: pointer;
@@ -395,6 +416,7 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 3rem;
 }
 
 footer img {
@@ -446,8 +468,62 @@ footer p {
     margin-top: 20px;
 }
 
+/** mode enfants**/
+.mode-enfant{
+    background: no-repeat url(/RetroToon/assets/images/backgroundnew.png);
+   /*  position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%; / La vidéo occupe toute la largeur de l'écran /
+    height: 100%; / La vidéo occupe toute la hauteur de l'écran /
+    object-fit: cover; / Assure que la vidéo couvre tout l'écran /
+    z-index: -1; / Met la vidéo en arrière-plan */
+}
+
+.mode-enfant h1{
+color: #68C7C1;
+}
+.mode-enfant h2{
+    color: #EB7A57;
+}
+.mode-enfant .paragraphe{
+    color: #774836;
+}
+.mode-enfant .paragraphe a{
+    color: #774836;
+}
+.mode-enfant .checkbox-container p{
+    color: #774836;
+}
+.mode-enfant .checkbox-container input[type="checkbox"]{
+    border: solid #774836 2px;
+}
+.mode-enfant .container-formulaire input{
+    background-color: #68C7C1;
+    color: #774836;
+}
+.mode-enfant .container-formulaire textarea{
+    background-color: #68C7C1;
+    color: #774836;
+}
+.mode-enfant .boutton-container button{
+    background-color: #68C7C1;
+    color: #774836;
+}
+.mode-enfant .checkbox-container input[type="checkbox"] {
+    border: 2px solid #774836; 
+    background-color: #F6EDC2;
+}
+.mode-enfant .checkbox-container input[type="checkbox"]:checked {
+    background-color: #774836; 
+}
 
 @media (max-width: 767px) {
+.tab-bar {
+        display: flex;
+    }
+    
+
     .entete{
         margin-block: 5rem 3rem;
     }
@@ -459,6 +535,12 @@ footer p {
 
     h2 {
         font-size: 1.3rem;
+    }
+
+    h3 {
+        font-size: 1rem;
+        text-align: center;
+        margin-top: 1rem;
     }
 
     #menu ul, .account {
@@ -516,17 +598,23 @@ footer p {
         color: #E28B70;
     }
 
-    /* Other adjustments for responsive design */
+    .carousel{
+        width: 100vw;
+    }
+
     .carousel-slide img {
         flex: 0 0 100%; /* Affiche une image à la fois sur les petits écrans */
-        width: 10rem;
-        /* height: 10vw;         */
+        width: 9rem;
+        height: 14.5rem;
+        object-fit: fill;        
     }
 
     .carousel-control {
         font-size: 2rem;
         left: 10;
         right: 10;
+        height: 20%;
+    width: 7%;
     }
 
     footer {

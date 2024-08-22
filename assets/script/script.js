@@ -55,6 +55,11 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
+        if (!prevButton || !nextButton) {
+            console.error(`Les boutons de contrôle sont introuvables dans le carrousel ${carouselId}.`);
+            return;
+        }
+
         let index = 0;
 
         function getSlidesToShow() {
@@ -93,12 +98,15 @@ document.addEventListener('DOMContentLoaded', function() {
             goToSlide(index);
         });
 
+        goToSlide(index); // Initialisation de la vue
         console.log(`Carrousel ${carouselId} initialisé avec succès.`);
     }
 
-    // Initialisation des carrousels
-    ['carousel0', 'carousel1', 'carousel2', 'carousel3', 'carousel4'].forEach(initializeCarousel);
+    // Initialisation de tous les carrousels
+    document.querySelectorAll('.carousel').forEach(carousel => initializeCarousel(carousel.id));
 });
+
+
 
 
 
@@ -334,44 +342,256 @@ const genreMap = {
 // Appeler la fonction pour charger les séries au chargement de la page
 fetchSeries();
 
+// **************Mode enfant
+function modeEnfant() {
+    // Basculer entre le mode Enfant et Adulte en ajoutant ou supprimant la classe 'mode-enfant'
+    document.body.classList.toggle('mode-enfant');
+}
+
+
+// *************************Pages séries par genres
 document.addEventListener('DOMContentLoaded', function() {
-    // Récupère la div de détails et ses éléments
-    const detailsContainer = document.getElementById('showDetails');
-    const detailsImg = document.getElementById('details-img');
-    const detailsTitle = document.getElementById('details-title');
-    const detailsDescription = document.getElementById('details-description');
-    const detailsYear = document.getElementById('details-year');
-    const detailsGenre = document.getElementById('details-genre');
 
-    // Récupère toutes les images dans les cartes
-    const images = document.querySelectorAll('.card-img');
+    // Configuration des carrousels pour les genres
+    const carousels = [
+        { id: 'carousel5', queryParams: '&with_genres=16,35' },   // Animation + Comédie
+        { id: 'carousel6', queryParams: '&with_genres=16,10759' }, // Animation + Action & Adventure
+        { id: 'carousel7', queryParams: '&with_genres=16,10765' },   // Animation + Science-Fiction
+        { id: 'carousel8', queryParams: '&with_genres=16,18' }, // Animation + Drame
+    ];
 
-    // Pour chaque image, ajoute un écouteur d'événement pour le clic
-    images.forEach(image => {
-        image.addEventListener('click', function() {
-            // Vérifie que le clic est capturé
-            console.log('Image cliquée:', this);
+    // Fonction pour récupérer et afficher les séries en fonction des paramètres
+    function fetchShowsForCarousel(carouselId, queryParams) {
+        const apiUrl = `https://api.themoviedb.org/3/discover/tv?api_key=${API_KEY}&language=fr-FR&sort_by=popularity.desc&first_air_date.lte=2010-12-31${queryParams}`;
 
-            // Remplit la div de détails avec l'image et les informations
-            detailsImg.src = this.src;
-            detailsTitle.innerText = this.getAttribute('data-title');
-            detailsDescription.innerText = this.getAttribute('data-description');
-            detailsYear.innerText = `Année : ${this.getAttribute('data-year')}`;
-            detailsGenre.innerText = `Genre : ${this.getAttribute('data-genre')}`;
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                const container = document.querySelector(`#${carouselId} .carousel-container`);
+                if (!container) {
+                    console.error(`Le conteneur pour ${carouselId} est introuvable.`);
+                    return;
+                }
 
-            // Affiche la div de détails
-            detailsContainer.style.display = 'flex';
+                container.innerHTML = '';
+
+                data.results.forEach(show => {
+                    const slide = document.createElement('div');
+                    slide.classList.add('carousel-slide', 'card');
+
+                    const img = document.createElement('img');
+                    img.classList.add('poster-comic', 'card-img');
+                    img.src = show.poster_path ? `https://image.tmdb.org/t/p/w500${show.poster_path}` : 'https://via.placeholder.com/200x300?text=No+Image';
+                    img.alt = `Affiche de ${show.name}`;
+                    img.dataset.title = show.name;
+                    img.dataset.description = show.overview || 'Pas de description disponible';
+                    img.dataset.year = show.first_air_date ? show.first_air_date.split('-')[0] : 'N/A';
+                    img.dataset.genre = show.genre_ids.map(id => genreMap[id] || 'Inconnu').join(', ');
+
+                    slide.appendChild(img);
+                    container.appendChild(slide);
+                });
+
+                // Initialiser le carrousel après l'ajout des images
+                initializeCarousel(carouselId);
+            })
+            .catch(error => console.error('Erreur lors de la récupération des données:', error));
+    }
+
+    // Fonction d'initialisation du carrousel
+    function initializeCarousel(carouselId) {
+        const carousel = document.querySelector(`#${carouselId}`);
+        
+        if (!carousel) {
+            console.error(`Carrousel avec l'ID ${carouselId} introuvable.`);
+            return;
+        }
+
+        const carouselContainer = carousel.querySelector('.carousel-container');
+        const slides = carousel.querySelectorAll('.carousel-slide');
+        const prevButton = carousel.querySelector('.carousel-control.prev');
+        const nextButton = carousel.querySelector('.carousel-control.next');
+        
+        if (!carouselContainer || slides.length === 0) {
+            console.error(`Le conteneur ou les slides sont introuvables dans le carrousel ${carouselId}.`);
+            return;
+        }
+
+        if (!prevButton || !nextButton) {
+            console.error(`Les boutons de contrôle sont introuvables dans le carrousel ${carouselId}.`);
+            return;
+        }
+
+        let index = 0;
+
+        function getSlidesToShow() {
+            if (window.innerWidth <= 480) {
+                return 1;
+            } else if (window.innerWidth <= 767) {
+                return 2;
+            } else {
+                return 5;
+            }
+        }
+
+        function goToSlide(index) {
+            const slidesToShow = getSlidesToShow();
+            const slideWidth = slides[0].offsetWidth;
+            const offset = index * slideWidth * slidesToShow;
+            carouselContainer.style.transform = `translateX(-${offset}px)`;
+        }
+
+        function nextSlide() {
+            const slidesToShow = getSlidesToShow();
+            index = (index + slidesToShow) % Math.ceil(slides.length / slidesToShow);
+            goToSlide(index);
+        }
+
+        function prevSlide() {
+            const slidesToShow = getSlidesToShow();
+            index = (index - slidesToShow + Math.ceil(slides.length / slidesToShow)) % Math.ceil(slides.length / slidesToShow);
+            goToSlide(index);
+        }
+
+        prevButton.addEventListener('click', prevSlide);
+        nextButton.addEventListener('click', nextSlide);
+
+        window.addEventListener('resize', () => {
+            goToSlide(index);
         });
-    });
 
-    // Récupère le bouton de fermeture
-    const closeButton = document.querySelector('.close-details');
+        console.log(`Carrousel ${carouselId} initialisé avec succès.`);
+    }
 
-    // Ajoute un événement pour cacher la div de détails
-    closeButton.addEventListener('click', function() {
-        detailsContainer.style.display = 'none';
+    // Initialiser tous les carrousels
+    carousels.forEach(carousel => {
+        fetchShowsForCarousel(carousel.id, carousel.queryParams);
     });
 });
+
+// ***************************Page films par genres************
+document.addEventListener('DOMContentLoaded', function() {
+    // Configuration des carrousels pour les genres de films d'animation
+    const carousels = [
+        { id: 'carousel9', queryParams: '&with_genres=16,35' }, // Animation + Comédie
+        { id: 'carousel10', queryParams: '&with_genres=16,28' }, // Animation + Aventure
+        { id: 'carousel11', queryParams: '&with_genres=16,14' }, // Animation + Fantastique
+        { id: 'carousel12', queryParams: '&with_genres=16,18' }, // Animation + Drame
+    ];
+
+    // Fonction pour récupérer et afficher les films d'animation en fonction des paramètres
+    function fetchMoviesForCarousel(carouselId, queryParams) {
+        const apiUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=fr-FR&sort_by=popularity.desc&release_date.lte=2010-12-31${queryParams}`;
+
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                const container = document.querySelector(`#${carouselId} .carousel-container`);
+                if (!container) {
+                    console.error(`Le conteneur pour ${carouselId} est introuvable.`);
+                    return;
+                }
+
+                container.innerHTML = '';
+
+                data.results.forEach(movie => {
+                    const slide = document.createElement('div');
+                    slide.classList.add('carousel-slide', 'card');
+
+                    const img = document.createElement('img');
+                    img.classList.add('poster-comic', 'card-img');
+                    img.src = movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : 'https://via.placeholder.com/200x300?text=No+Image';
+                    img.alt = `Affiche de ${movie.title}`;
+                    img.dataset.title = movie.title;
+                    img.dataset.description = movie.overview || 'Pas de description disponible';
+                    img.dataset.year = movie.release_date ? movie.release_date.split('-')[0] : 'N/A';
+                    img.dataset.genre = movie.genre_ids.map(id => genreMap[id] || 'Inconnu').join(', ');
+
+                    slide.appendChild(img);
+                    container.appendChild(slide);
+                });
+
+                // Initialiser le carrousel après l'ajout des images
+                initializeCarousel(carouselId);
+            })
+            .catch(error => console.error('Erreur lors de la récupération des données:', error));
+    }
+
+    // Fonction d'initialisation du carrousel
+    function initializeCarousel(carouselId) {
+        const carousel = document.querySelector(`#${carouselId}`);
+        
+        if (!carousel) {
+            console.error(`Carrousel avec l'ID ${carouselId} introuvable.`);
+            return;
+        }
+
+        const carouselContainer = carousel.querySelector('.carousel-container');
+        const slides = carousel.querySelectorAll('.carousel-slide');
+        const prevButton = carousel.querySelector('.carousel-control.prev');
+        const nextButton = carousel.querySelector('.carousel-control.next');
+        
+        if (!carouselContainer || slides.length === 0) {
+            console.error(`Le conteneur ou les slides sont introuvables dans le carrousel ${carouselId}.`);
+            return;
+        }
+
+        if (!prevButton || !nextButton) {
+            console.error(`Les boutons de contrôle sont introuvables dans le carrousel ${carouselId}.`);
+            return;
+        }
+
+        let index = 0;
+
+        function getSlidesToShow() {
+            if (window.innerWidth <= 480) {
+                return 1;
+            } else if (window.innerWidth <= 767) {
+                return 2;
+            } else {
+                return 5;
+            }
+        }
+
+        function goToSlide(index) {
+            const slidesToShow = getSlidesToShow();
+            const slideWidth = slides[0].offsetWidth;
+            const offset = index * slideWidth * slidesToShow;
+            carouselContainer.style.transform = `translateX(-${offset}px)`;
+        }
+
+        function nextSlide() {
+            const slidesToShow = getSlidesToShow();
+            index = (index + slidesToShow) % Math.ceil(slides.length / slidesToShow);
+            goToSlide(index);
+        }
+
+        function prevSlide() {
+            const slidesToShow = getSlidesToShow();
+            index = (index - slidesToShow + Math.ceil(slides.length / slidesToShow)) % Math.ceil(slides.length / slidesToShow);
+            goToSlide(index);
+        }
+
+        prevButton.addEventListener('click', prevSlide);
+        nextButton.addEventListener('click', nextSlide);
+
+        window.addEventListener('resize', () => {
+            goToSlide(index);
+        });
+
+        console.log(`Carrousel ${carouselId} initialisé avec succès.`);
+    }
+
+    // Initialiser tous les carrousels
+    carousels.forEach(carousel => {
+        fetchMoviesForCarousel(carousel.id, carousel.queryParams);
+    });
+});
+
+
+
+
+
 
 
 
