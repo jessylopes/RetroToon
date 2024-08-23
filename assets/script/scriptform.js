@@ -112,7 +112,7 @@ function inscrit(){
         localStorage.setItem('date', date);
         localStorage.setItem('password', password);
         alert('Bravo ! Votre inscription réussie, bienvenue sur RetroToon'); 
-        window.location.href = 'http://RetroToon/html/index.html';
+        window.location.href = 'http://127.0.0.1:5500/html/series.html';
       } 
       else {
         alert('Veuillez remplir tous les champs.');
@@ -140,7 +140,7 @@ function connect( ) {
     const storedPassword = localStorage.getItem('password');
     if (email === storedEmail && password === storedPassword) {
         alert('Bienvenue, ' + storedPrenom + ' !');
-        window.location.href = 'http://RetroToon/html/index.html';
+        window.location.href = 'http://127.0.0.1:5500/html/series.html';
       } else {
         alert('Oups... Votre mot de passe est incorrect.');
       }

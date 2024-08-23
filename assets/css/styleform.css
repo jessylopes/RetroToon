@@ -239,9 +239,10 @@ hr {
 /* *************************menu deroulant ******************/
 /************************titres*************************/
 h1 {
-    font-family: 'Bangers', cursive;
+    font-family: 'Bangers';
     color: #FACA78;
     margin-bottom: 30px;
+    font-weight: normal;
 }
 .paragraphe {
     color: #DD5341;
@@ -257,7 +258,8 @@ h1 {
     padding-left: 5px;
 }
 h2 {
-    font-family: 'Bangers', cursive;
+    font-family: 'Bangers';
+    font-weight: normal;
     color: #FACA78;
     margin-bottom: 10px;
     font-size: 20px;
@@ -489,7 +491,7 @@ footer p {
     }
 /*********************** mode enfants*******************/
 .mode-enfant{
-    background: no-repeat url(/RetroToon/assets/images/backgroundnew.png);
+    background: no-repeat url(/assets/images/backgroundnew.png);
    /*  position: fixed;
     top: 0;
     left: 0;

@@ -88,7 +88,11 @@ for (i = 0; i < acc.length; i++) {
         }
     });
 }
-
+window.onload = function() {
+    if (window.location.hash === "#content2") {
+        document.getElementById("content2").style.display = "block";
+    }
+};
 /* function modeEnfant() {
     // Basculer entre le mode Enfant et Adulte en ajoutant ou supprimant la classe 'mode-enfant'
     document.body.classList.toggle('mode-enfant');

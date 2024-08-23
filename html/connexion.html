@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RetroToon-Home-Sub</title>
-    <link rel="stylesheet" href="/RetroToon/assets/css/styleform.css">
+    <link rel="stylesheet" href="/assets/css/styleform.css">
     <link rel="icon" type="image/png" sizes="16x16"
-        href="/RetroToon/assets/images/Design_sans_titre-removebg-preview_2.png"> <!-- pour logo fenetre -->
+        href="/assets/images/Design_sans_titre-removebg-preview 4.png"> <!-- pour logo fenetre -->
     <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
@@ -21,18 +21,18 @@
         <nav id="menu">
             <!-- Logo à gauche -->
             <div class="logo">
-                <a href="index.html">
-                    <img src="/RetroToon/assets/images/Design_sans_titre-removebg-preview_2.png" alt="Logo">
+                <a href="/html/index.html">
+                    <img src="/assets/images/Design_sans_titre-removebg-preview 4.png" alt="Logo">
                 </a>
             </div>
 
             <!-- Liens de navigation au centre -->
             <ul class="nav-links">
-                <li><a href="#">Accueil</a></li>
-                <li><a href="#">Séries</a></li>
-                <li><a href="#">Films</a></li>
-                <li><a href="#">Année</a></li>
-                <li><a href="#">Favoris</a></li>
+                <li><a href="/html/index.html">Accueil</a></li>
+                <li><a href="/html/series.html">Séries</a></li>
+                <li><a href="/html/films.html">Films</a></li>
+                <li><a href="/html/years.html">Année</a></li>
+                <li><a href="/parametre.html#content2">Favoris</a></li>
             </ul>
 
             <!-- Icônes à droite -->
@@ -48,11 +48,11 @@
                     </a>
 
                     <ul class="sub-menus" id="accountSubMenu">
-                        <li><a href='#'><i class="fi fi-rr-child-head"></i>Mode enfant</a></li>
+                        <li onclick="modeEnfant()" ><a href='#'><i class="fi fi-rr-child-head"></i>Mode enfant</a></li>
                         <hr>
-                        <li><a href='#'><i class="fi fi-rr-settings"></i>Paramètres</a></li>
+                        <li><a href='/parametre.html'><i class="fi fi-rr-settings"></i>Paramètres</a></li>
                         <hr>
-                        <li><a href='#'><i class="fi fi-rr-heart"></i>Favoris</a></li>
+                        <li><a href='/parametre.html#content2'><i class="fi fi-rr-heart"></i>Favoris</a></li>
                         <hr>
                         <li><a href='#'><i class="fi fi-rr-exit"></i>Déconnexion</a></li>
                     </ul>
@@ -64,7 +64,7 @@
     <main>
         <section class="connexion">
             <h1>Connexion</h1>
-            <p class="paragraphe"> Vous n'avez pas de compte? Inscrivez-vous juste <a href="inscription.html" id="switchToSignup">ici</a>.
+            <p class="paragraphe"> Vous n'avez pas de compte? Inscrivez-vous juste <a href="/html/inscription.html" id="switchToSignup">ici</a>.
             </p>
             <div id=loginForm class="container-connexion" action="#" method="post">
                 <div>
@@ -90,7 +90,7 @@
     </main>
     <button onclick="modeEnfant()">Cliquez ici pour changer de mode</button>
     <footer class="container-footer">
-        <img src="/RetroToon/assets/images/Design_sans_titre-removebg-preview_2.png" alt="logo">
+        <img src="/assets/images/Design_sans_titre-removebg-preview 4.png" alt="logo">
         <div id="liste-footer">
             <p>Accueil</p>
             <p>Nous contacter</p>
@@ -107,7 +107,7 @@
         <P>Tous droits réservés © Retrotoon Group 2024</P>
     </footer>
 
-    <script src="/RetroToon/assets/script/script.js"></script>
+    <script src="/assets/script/scriptform.js"></script>
 </body>
 
 </html>
