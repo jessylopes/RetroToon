@@ -14,7 +14,15 @@ body {
     text-align: center;
     flex-direction: column;
     height: 100vh;
-    font-weight: normal; /*pour que l'ecriture soit plus fine */
+    font-family: "Fredoka", sans-serif;
+}
+
+/* Styles pour les titres */
+h1, h2, h3 {
+    font-family: "Bangers", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    color: #FACA78;
 }
 /************************general*************************/
 /* *************************navbar******************/
@@ -245,7 +253,7 @@ h1 {
     font-weight: normal;
 }
 .paragraphe {
-    color: #DD5341;
+    color: #EB7A57;
     font-family: 'Fredoka', sans-serif;
     margin-bottom: 40px;
     font-size: 120%;
@@ -254,7 +262,7 @@ h1 {
     justify-content: center;
 }
 .paragraphe a{
-    color: #DD5341;
+    color: #EB7A57;
     padding-left: 5px;
 }
 h2 {
@@ -269,31 +277,29 @@ h2 {
 /************************input*************************/
 .container-formulaire input,
 .container-formulaire textarea {
-    background-color: #DD5341;
+    background-color: #eb7a57a0;
     border: none;
     color: #FACA78 ;
-    font-weight: bold;
     font-size: 20px;
-    font-family: 'Fredoka', sans-serif;
-    opacity: 0.5;
     padding: 10px;
     margin-bottom: 20px;
     width: 600px;
 }
 .container-formulaire textarea {
     height: 250px;
-    resize: none;
-    /*retire le carrée en bas pour reglage de la zone de texte*/
+    resize: none; /*retire le carrée en bas pour reglage de la zone de texte*/
 }
 .container-connexion input{
-    background-color: #DD5341;
+    background-color: #eb7a57a0;
     border: none;
     color: #FACA78;
-    font-family: 'Fredoka', sans-serif;
-    opacity: 0.5;
     padding: 10px;
     margin-bottom: 20px;
     width: 350px;
+}
+
+input::placeholder{
+    color: #FACA78;
 }
 /************************input*************************/
 /************************section *************************/
@@ -319,7 +325,7 @@ h2 {
 }
 .checkbox-container p {
     font-family: 'Fredoka', sans-serif;
-    color: #DD5341;
+    color: #EB7A57;
     font-size: x-small;
     white-space: nowrap;
     padding-right: 15px;
@@ -331,14 +337,14 @@ h2 {
     -webkit-appearance: none;
     width: 20px;
     height: 20px;
-    border: 2px solid #DD5341; /* Bordure rouge */
+    border: 2px solid #EB7A57; /* Bordure rouge */
     border-radius: 3px; /* Coins arrondis */
     background-color: transparent; /* Fond transparent */
     cursor: pointer;  
 }
 
 .checkbox-container input[type="checkbox"]:checked {
-    background-color: #DD5341; /* Fond rouge lorsqu'elle est cochée */
+    background-color: #EB7A57; /* Fond rouge lorsqu'elle est cochée */
 }
  /*.checkbox-container input[type="checkbox"]:checked::after {
  content: '✕'; croix a l'intérieur du carrée */
@@ -354,15 +360,20 @@ h2 {
     margin-bottom: 10px;
 }
 .boutton-container button {
-    background-color: #DD5341;
-    font-family: 'Fredoka', sans-serif;
-    color: #FACA78;
     border: none;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 20px;
-    padding-right: 20px;
-    border-radius: 4px;
+    background-color: #EB7A57;
+    color: #FACA78;
+    height: 2.5rem;
+    width: 7rem;
+    padding-inline: 10px;
+    font-size: 18px;
+    margin-block: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px; 
+}
+
+.boutton-container button:hover{
+    background-color: #E28B70;
 }
 /************************boutton*************************/
 /*********************** footer *******************/
@@ -385,8 +396,7 @@ footer img {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-block: 20px;
     padding: 0;
 }
 #liste-footer p {

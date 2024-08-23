@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RetroToon-Paramètres</title>
     <link rel="icon" type="image/png" sizes="16x16"
-        href="/assets/imgParametre/Design_sans_titre-removebg-preview 2.png">
+        href="/RetroToon/assets/imgParametre/Design_sans_titre-removebg-preview 2.png">
+    <link rel="stylesheet" href="/assets/css/parametre.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@flaticon/flaticon-uicons/css/all/all.css">
-    <link rel="stylesheet" href="/assets/css/parametre.css">
 </head>
 
 <body>
@@ -19,18 +19,18 @@
         <nav id="menu">
             <!-- Logo à gauche -->
             <div class="logo">
-                <a href="/html/index.html">
+                <a href="index.html">
                     <img src="/assets/imgParametre/Design_sans_titre-removebg-preview 2.png" alt="Logo">
                 </a>
             </div>
 
             <!-- Liens de navigation au centre -->
             <ul class="nav-links">
-                <li><a href="/html/index.html">Accueil</a></li>
-                <li><a href="/html/series.html">Séries</a></li>
-                <li><a href="/html/films.html">Films</a></li>
-                <li><a href="/html/years.html">Année</a></li>
-                <li><a href="/parametre.html#content2">Favoris</a></li>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="series.html">Séries</a></li>
+                <li><a href="films.html">Films</a></li>
+                <li><a href="annees.html">Années</a></li>
+                <li><a href="parametre.html#content2">Favoris</a></li>
             </ul>
 
             <!-- Icônes à droite -->
@@ -48,9 +48,9 @@
                     <ul class="sub-menus" id="accountSubMenu">
                         <li onclick="modeEnfant()"><a href='#'><i class="fi fi-rr-child-head"></i>Mode enfant</a></li>
                         <hr>
-                        <li><a href='/parametre.html'><i class="fi fi-rr-settings"></i>Paramètres</a></li>
+                        <li><a href='parametre.html'><i class="fi fi-rr-settings"></i>Paramètres</a></li>
                         <hr>
-                        <li><a href='/parametre.html#content2'><i class="fi fi-rr-heart"></i>Favoris</a></li>
+                        <li><a href='parametre.html#content2'><i class="fi fi-rr-heart"></i>Favoris</a></li>
                         <hr>
                         <li><a href='#'><i class="fi fi-rr-exit"></i>Déconnexion</a></li>
                     </ul>
@@ -60,15 +60,28 @@
     </header>
 
     <div class="tab-bar">
-        <a href="/html/index.html"><i class="fa-solid fa-house"></i></a>
-        <a href="/html/films.html"><i class="fi fi-rr-clapperboard-play"></i></a>
-        <a href="/html/series.html"><i class="fi fi-rr-tv-retro"></i></a>
-        <a href="/html/years.html"><i class="fi fi-rr-90s-music-disc"></i></i></a>
-        <a href="/parametre.html#content2"><i class="fi fi-rr-heart"></i></a>
+        <a href="index.html"><i class="fa-solid fa-house"></i></a>
+        <a href="films.html"><i class="fi fi-rr-clapperboard-play"></i></a>
+        <a href="series.html"><i class="fi fi-rr-tv-retro"></i></a>
+        <a href="annees.html"><i class="fi fi-rr-90s-music-disc"></i></i></a>
+        <a href="parametre.html#content2"><i class="fi fi-rr-heart"></i></a>
         <a href="#" class="icon dropdown-arrow" id="accountToggle">
             <i class="fa-solid fa-user"></i>
         </a>
     </div>
+    </header>
+    
+    <div class="tab-bar">
+        <a href="index.html"><i class="fa-solid fa-house"></i></a>
+        <a href="films.html"><i class="fi fi-rr-clapperboard-play"></i></a>
+        <a href="series.html"><i class="fi fi-rr-tv-retro"></i></a>
+        <a href="annees.html"><i class="fi fi-rr-90s-music-disc"></i></i></a>
+        <a href="parametre.html#content2"><i class="fi fi-rr-heart"></i></a>
+        <a href="#" class="icon dropdown-arrow" id="accountToggle">
+            <i class="fa-solid fa-user"></i>
+        </a>
+    </div>
+
     <main>
         <div class="utilisateur">
             <div id="mobile">
@@ -148,8 +161,8 @@
                 </div>
             </div>
             <div class="affiche">
-                <a href="/html/fiche-dessin-anime.html"><img src="/assets/imgParametre/Totally-Spies-S1.jpg" alt="affichage" height="150px"
-                    width="100px"></a>
+                <img src="/assets/imgParametre/Totally-Spies-S1.jpg" alt="affichage" height="150px"
+                    width="100px">
                 <div>
                     <h2>Totally-Spies</h2>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut quae expedita sint
