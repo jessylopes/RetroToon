@@ -96,16 +96,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 // ***********API TMDB**************
-const API_KEY = 'abedd43cf8d6083e8a33eafb9cc8b3f4'; // Clé API pour accéder à l'API de The Movie Database (TMDB)
+// Clé API pour accéder à l'API de The Movie Database (TMDB)
+const API_KEY = 'abedd43cf8d6083e8a33eafb9cc8b3f4'; 
 
 // ********************* Années 80 *****************
 // Fonction pour récupérer et afficher les séries TV animées des années 80
-function fetchAndDisplayTVShows1980s() {
-    // URL de l'API pour découvrir les séries TV avec les paramètres spécifiés :
+/**
+ *     // URL de l'API pour découvrir les séries TV avec les paramètres spécifiés :
     // - Genre : 16 (Animation)
     // - Date de première diffusion : entre le 1er janvier 1980 et le 31 décembre 1989
     // - Langue : français (fr-FR)
     // - Triées par popularité décroissante
+ * @param {hggghgh} fetchAndDisplayTVShows1980s
+ */
+function fetchAndDisplayTVShows1980s() {
+
     const urlTV = `https://api.themoviedb.org/3/discover/tv?api_key=${API_KEY}&with_genres=16&first_air_date.gte=1980-01-01&first_air_date.lte=1989-12-31&language=fr-FR&sort_by=popularity.desc`;
 
     // Appel à l'API pour récupérer les données des séries TV

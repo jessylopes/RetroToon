@@ -1,0 +1,541 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --dark-blue: #001D3D;
+    --mustard: #FACA78;
+    --corail: #EB7A57;
+    --font-size-paragraph: 1rem;
+    --font-size-title: 2rem;
+}
+
+/* Styles pour les titres */
+h1, h2, h3 {
+    font-family: "Bangers", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    color: #FACA78;
+    letter-spacing: 2px;
+}
+
+/* Styles pour le corps de la page */
+body {
+    font-family: "Fredoka", sans-serif;
+    background-color: #001D3D;
+
+}
+
+
+
+/* Styles pour l'en-tête */
+.entete{
+    /* border: solid red 1px; */
+    margin-block: 8rem 6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+h1{
+    font-size: 4rem;
+}
+
+h3{
+    margin-top: 3rem;
+    font-size: 2rem;
+}
+
+hr{
+    border: solid 1px #FACA78;
+    margin: 5% 10%;
+}
+
+.tab-bar {
+    display: none;
+}   
+
+
+
+/* Styles pour la barre de navigation */
+#menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-block: 10px;
+    padding-inline: 20px 0px;
+    background: linear-gradient(to right, #000, transparent);
+    height: 50px;
+    position: fixed; /* Fixe la navbar en haut de la page */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Assure que la navbar est au-dessus des autres éléments */
+}
+
+/* Styles pour le logo à gauche */
+.logo img {
+    width: 3em; /* Taille du logo */
+}
+
+/* Centrage des liens de navigation */
+.nav-links {
+    display: flex;
+    justify-content: space-around;
+    flex-grow: 1;
+    list-style: none;
+}
+
+.nav-links li {
+    list-style: none;
+}
+
+.nav-links a {
+    display: block;
+    line-height: 45px;
+    padding: 0 14px;
+    text-decoration: none;
+    color: #EB7A57;
+    font-size: 16px;
+}
+
+.nav-links a:hover {
+    color: #E28B70;
+}
+
+/* Alignement des icônes à droite */
+.nav-icons {
+    display: flex;
+    align-items: center;
+}
+
+.nav-icons .icon {
+    margin-left: 15px;
+    position: relative; /* Pour la barre de recherche */
+}
+
+.nav-icons .icon i {
+    font-size: 1.5em; /* Taille des icônes */
+    color: #FACA78;
+    /* text-decoration: none !important; */
+}
+
+.icon i:hover,.search-icon i:hover, footer i:hover{
+    color: #F6EDC2;
+    text-decoration: none;
+}
+
+/* ****************barre de recherche**** */
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center; /* Centre verticalement les éléments */
+}
+
+.search-box {
+    transition: width 0.6s ease, border-radius 0.6s ease, background 0.6s ease, box-shadow 0.6s ease;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    border: none;
+    cursor: text;
+    background: transparent;
+    color: transparent; /* Masque le texte lorsqu'il n'est pas en focus */
+    padding-left: 40px; /* Espace pour l'icône de recherche */
+    text-indent: -5000px; /* Cache le texte dans la barre de recherche lorsqu'elle n'est pas en focus */
+}
+
+.search-box:focus {
+    border: none;
+    outline: none;
+    box-shadow: 0 0 0 2px #FACA78; /* Couleur de l'ombre au focus */
+}
+
+.search-box.active {
+    width: 300px;
+    border-radius: 20px;
+    background: #EB7A57;
+    color: #FACA78;
+    text-indent: 0; /* Affiche le texte lorsqu'elle est en focus */
+    padding-left: 40px;
+}
+
+.search-icon {
+    position: absolute;
+    left: 10px; /* Ajuste la position horizontale de l'icône de recherche */
+    top: 54%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.search-icon i{
+    color: #FACA78;
+    font-size: 1.5rem;
+}
+
+/* Styles pour le menu déroulant */
+.account {
+    position: relative; /* Pour positionner le sous-menu par rapport à .account */
+}
+
+.sub-menus {
+    position: absolute;
+    top: 144%; /* Positionner le sous-menu directement sous le parent */
+    right: 0;  /* Aligner le sous-menu avec le bord droit de l'icône */
+    width: 200px; /* Largeur du sous-menu */
+    background: #EB7A57;
+    z-index: 99;
+    display: none; /* Masqué par défaut */
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.sub-menus.active {
+    display: block; /* Affiche le sous-menu */
+    opacity: 1; /* Assure une transition en douceur */
+    visibility: visible;
+}
+
+.sub-menus li {
+    list-style: none;
+}
+
+.sub-menus a {
+    color: #FACA78;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    padding: 20px 15px; /* Espacement interne des liens */
+}
+
+.sub-menus a:hover {
+    background: #E28B70;
+    color: #FACA78;
+}
+
+.sub-menus i {
+    padding-right: 10px; /* Espacement entre l'image et le texte */
+    font-size: 1.5rem;
+}
+
+/************ VIDEO PLAYER BOX ************/
+video {
+    pointer-events: none;
+    position: relative;
+    /* border: solid red 1px; */
+}
+
+/************ Affiche ************/
+#affiche{
+    padding-block: 3rem;
+    /* border: solid 1px peachpuff; */
+}
+
+#affiche h1 {
+    text-shadow: 0 4px 15px #000;
+    padding: 0 4rem 3rem;
+
+
+}
+#affiche div{
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+
+
+
+}
+
+#affiche img{
+    box-shadow: 0 4px 15px #000;
+    /* width: 10%; */
+}
+
+
+/*****************carrousel***********/
+.carousel-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    overflow: hidden; /* Empêche le débordement visuel */
+    width: 100%; 
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: no-wrap;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  overflow: hidden;
+  /* border: solid 1px red; */
+}
+.container:hover .arrow-right,
+.container:hover .arrow-left {
+  opacity: 1;
+  transition: 0.2s;
+}
+.container .body-item-1:hover {
+  color: red;
+  opacity: 1;
+}
+.container .body-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+}
+.container .body-item:hover {
+  width: 22vw;
+  height: 19vw;
+  opacity: 1;
+  transition: 0.4s;
+  transition-delay: 0.4s;
+}
+.container .body-item-1 {
+  flex-grow: 1;
+  text-align: center;
+  opacity: 0.4;
+}
+.container .body-item-1:hover {
+  color: red;
+  opacity: 1;
+  transition: 0.2s;
+}
+.container .body-item-2 {
+  align-self: flex-start;
+  font-size: 2vw;
+  margin-bottom: 0.5vw;
+}
+.container .body-item-3 {
+  align-self: flex-start;
+}
+.container .body-item-4 {
+  padding-right: 3vw;
+}
+.container .body-item-5 {
+  width: 40vw;
+  text-align: center;
+  /* border: solid 1px greenyellow; */
+}
+.container .body-item-6 {
+  align-self: flex-end;
+  position: absolute;
+}
+.container .play {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container .play i {
+  margin-top: 3vw;
+  justify-content: center;
+  width: 6vw;
+  height: 6vw;
+  border-radius: 25vw;
+  background: rgba(0, 0, 0, 0.5);
+  border: 0.1em solid white;
+  padding: 1.4vw;
+  font-size: 2.5vw;
+}
+.container * {
+  background-color: transparent;
+}
+
+.details-icon {
+  font-size: 2.5vw;
+}
+
+/* Taille par défaut des éléments */
+.item {
+    width: 20vw; /* Taille initiale modérée */
+    height: 12vw; /* Taille initiale modérée */
+    background-size: cover; /* Couvrir l'élément avec l'image */
+    margin: 0 5px; /* Espacement entre les éléments */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s ease; /* Transition plus douce */
+    color: white;
+    box-shadow: #001429;
+}
+
+/* Effet de hover pour agrandir légèrement l'élément */
+.item:hover {
+    width: 22vw; /* Agrandir légèrement en largeur */
+    height: 14vw; /* Agrandir légèrement en hauteur */
+    transition: 0.3s ease; /* Transition rapide et fluide */
+    opacity: 1;
+}
+
+.item:hover .body-item {
+  visibility: visible;
+}
+.item:hover .body-item-1 {
+  width: 40vw;
+}
+
+.icon-set {
+  display: flex;
+  flex-direction: column;
+  margin: 5vw 0 0 0;
+}
+.icon-set i {
+  margin: 0 1vw 0.5vw 1vw;
+  font-size: 0.9vw;
+  border-radius: 50%;
+  padding: 0.7vw;
+  background: rgba(0, 0, 0, 0.5);
+  border: 0.1em solid rgba(255, 255, 255, 0.5);
+}
+.icon-set i:hover {
+  font-size: 1.1vw;
+  border-color: #fff;
+  background: rgba(0, 0, 0, 0.7);
+  transition: 0.4s;
+}
+
+.arrow-right,
+.arrow-left {
+  color: white;
+  background-color: rgba(20, 20, 20, 0.5);
+  width: 4%;
+  height: 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  cursor: pointer;
+  font-size: 3vw;
+  opacity: 0.2;
+}
+.arrow-right:hover,
+.arrow-left:hover {
+  font-size: 5vw;
+  transition: 0.1s;
+}
+
+.arrow-right {
+  right: 0;
+}
+
+.arrow-left {
+  left: 0;
+}
+
+.match {
+  color: #45af5e;
+  font-size: bold;
+}
+
+.description {
+  font-weight: 300;
+  font-size: 1.4vw;
+}
+
+.properties {
+  font-size: 1.35vw;
+}
+.properties * {
+  margin: 1px;
+}
+.properties .age-limit {
+  border: 0.1em solid rgba(255, 255, 255, 0.4);
+  font-weight: 200;
+  font-size: 1.2vw;
+  padding: 0 3px 0 3px;
+}
+
+
+.item-1:hover {
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9));
+  background-size: 100% 100%;
+}
+
+.item-2:hover {
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9));
+  background-size: 100% 100%;
+}
+
+.item-3:hover {
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9));
+  background-size: 100% 100%;
+}
+
+.item-4:hover {
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9));
+  background-size: 100% 100%;
+}
+
+.item-5 {
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9));
+}
+.item-5:hover {
+
+  background-size: 100% 100%;
+}
+
+.content-wrapper {
+    background-color:rgba(0, 20, 41, 0.716); /* Fond semi-transparent noir */
+    padding: 1vw;
+    /* border-radius: 0.5vw; */
+    transition: opacity 0.3s ease-in-out;
+    opacity: 0;
+    /* border: solid 1px lime; */
+    margin-bottom: 35%;
+
+}
+
+.item:hover .content-wrapper {
+    opacity: 1; /* Affiche le contenu lorsque l'élément est survolé */
+}
+
+
+
+  /* ************************footer********************* */
+footer {
+    height: 300px;
+    background-color: #EB7A57;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 3rem;
+}
+
+footer img {
+    width: 100px;
+    height: 100px;
+    margin-top: 20px;
+}
+
+#liste-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 0;
+}
+
+#liste-footer p {
+    margin: 0;
+    padding: 10px;
+    color: #FACA78;
+}
+
+footer i {
+    font-size: 30px;
+    color: #FACA78;
+    padding: 10px;
+}
+footer p {
+    color: #FACA78;
+    margin-top: 20px;
+}
