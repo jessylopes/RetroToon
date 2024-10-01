@@ -279,7 +279,7 @@ video {
 }
 
 #progress-bar {
-    -webkit-appearance: none;
+    --webkit-appearance: none;
     /* width: 100%; */
     height: 15px;
     border-radius: 5px;
@@ -361,7 +361,7 @@ div #left-controls {
 }
 
 #volume-slider {
-    -webkit-appearance: none;
+    --webkit-appearance: none;
     height: 15px;
     border-radius: 5px;
     background: #d3d3d3;
@@ -480,7 +480,7 @@ select:focus {
     cursor: pointer;
 }
 
-.show-more-comment {}
+
 
 
 #commentaires .user-comment-row {
