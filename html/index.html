@@ -26,14 +26,14 @@
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="series.html">Séries</a></li>
                 <li><a href="films.html">Films</a></li>
-                <li><a href="years.html">Année</a></li>
-                <li><a href="#">Favoris</a></li>
+                <li><a href="annees.html">Années</a></li>
+                <li><a href="parametre.html#content2">Favoris</a></li>
             </ul>
 
             <!-- Icônes à droite -->
             <div class="nav-icons">
-                <form class="search-container" action="search">
-                    <input id="search-box" type="text" class="search-box" name="q" />
+                <form class="search-container" action="resultas-barre-de-recherche.html">
+                    <input id="search-box" type="text" class="search-box" name="q"/>
                     <label for="search-box"><span class="search-icon"><i class="fi fi-rr-search"></i></span></label>
                 </form>
                 <a href="#" class="icon" style="text-decoration: none;"><i class="fi fi-rr-globe"></i></a>
@@ -43,11 +43,9 @@
                     </a>
 
                     <ul class="sub-menus" id="accountSubMenu">
-                        <li><a href='#'><i class="fi fi-rr-child-head"></i>Mode enfant</a></li>
+                        <li><a href='parametre.html'><i class="fi fi-rr-settings"></i>Paramètres</a></li>
                         <hr>
-                        <li><a href='#'><i class="fi fi-rr-settings"></i>Paramètres</a></li>
-                        <hr>
-                        <li><a href='#'><i class="fi fi-rr-heart"></i>Favoris</a></li>
+                        <li><a href='parametre.html#content2'><i class="fi fi-rr-heart"></i>Favoris</a></li>
                         <hr>
                         <li><a href='#'><i class="fi fi-rr-exit"></i>Déconnexion</a></li>
                     </ul>
@@ -61,10 +59,10 @@
             </h1>
 
             <button>
-                <a href="inscription.html">Inscription</a>
+                <a href="/html/inscription.html">Inscription</a>
             </button>
 
-            <p>Vous êtes déjà inscrit.e ? <span><a href="connexion.html">Connectez-vous juste ici.</a></span></p>
+            <p>Vous êtes déjà inscrit.e ? <span><a href="/html/connexion.html">Connectez-vous juste ici.</a></span></p>
         </div>
 
     </header>
@@ -73,7 +71,7 @@
         <a href="index.html"><i class="fa-solid fa-house"></i></a>
         <a href="films.html"><i class="fi fi-rr-clapperboard-play"></i></a>
         <a href="series.html"><i class="fi fi-rr-tv-retro"></i></a>
-        <a href="years.html"><i class="fi fi-rr-90s-music-disc"></i></i></a>
+        <a href="annees.html"><i class="fi fi-rr-90s-music-disc"></i></i></a>
         <a href="parametre.html#content2"><i class="fi fi-rr-heart"></i></a>
         <a href="#" class="icon dropdown-arrow" id="accountToggle">
             <i class="fa-solid fa-user"></i>
@@ -161,6 +159,37 @@
         <P>Tous droits réservés © Retrotoon Group 2024</P>
     </footer>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('searchForm');
+            const input = document.getElementById('search-box');
+        
+            function redirectToResultsPage(query) {
+                const url = new URL('results.html', window.location.href);
+                url.searchParams.set('query', query);
+                window.location.href = url;
+            }
+        
+            form.addEventListener('submit', event => {
+    event.preventDefault(); // Empêche le rechargement de la page par défaut
+    const searchQuery = input.value.trim();
+    if (searchQuery) {
+        // Redirige vers la page des résultats en ajoutant la requête de recherche à l'URL
+        window.location.href = `resultas-barre-de-recherche.html?query=${encodeURIComponent(searchQuery)}`;
+    }
+});
+
+        
+            input.addEventListener('keyup', event => {
+                if (event.key === 'Enter') {
+                    const searchQuery = input.value.trim();
+                    if (searchQuery) {
+                        redirectToResultsPage(searchQuery);
+                    }
+                }
+            });
+        });
+        </script>
     <script src="/assets/script/script.js"></script>
 </body>
 

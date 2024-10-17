@@ -269,8 +269,7 @@ h1 {
 }
 .container-formulaire textarea {
     height: 250px;
-    resize: none;
-    /*retire le carrée en bas pour reglage de la zone de texte*/
+    resize: none; /*retire le carrée en bas pour reglage de la zone de texte*/
 }
 
 .container-formulaire input.inputserie{
@@ -379,8 +378,7 @@ footer img {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-block: 20px;
     padding: 0;
 }
 

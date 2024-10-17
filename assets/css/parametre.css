@@ -9,6 +9,7 @@
 body {
     background-color: #001D3D;
     width: 100%;
+    font-family: "Fredoka", sans-serif;
 }
 
 hr {
@@ -270,7 +271,7 @@ ul {
     transition: 0.4s;
   }
   .active, .gestion:hover {
-    background-color: #DD5341;
+    background-color: #E28B70;
   }
   .contenuCache {
 display: none;
