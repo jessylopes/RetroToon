@@ -24,7 +24,7 @@ body {
     --dark-blue: #001D3D;
     --beige: #FFFAE0;
     --corail: #EB7A57;
-    --font-size-paragraph: 1.2rem;
+    --font-size-paragraph: 16px;
     --font-size-title: 2rem;
 }
 
@@ -56,29 +56,28 @@ section {
     align-items: center;
     padding-block: 10px;
     padding-inline: 20px 0px;
-    background: linear-gradient(to right, #000, transparent);
-    height: 50px;
+    background: linear-gradient( #001429, transparent);
+    height: 80px;
     position: fixed;
-    /* Fixe la navbar en haut de la page */
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
-    /* Assure que la navbar est au-dessus des autres éléments */
 }
 
 /* Styles pour le logo à gauche */
 .logo img {
-    width: 3em;
-    /* Taille du logo */
+    width: 4em;
 }
 
 /* Centrage des liens de navigation */
 .nav-links {
     display: flex;
-    justify-content: space-around;
-    flex-grow: 1;
-    list-style: none;
+    justify-content:flex-start;
+  flex-grow: 1;
+}
+.nav-links i{
+    padding-right: 3px;
 }
 
 .nav-links li {
@@ -90,8 +89,11 @@ section {
     line-height: 45px;
     padding: 0 14px;
     text-decoration: none;
-    color: var(--beige);
+    color: #FFFAE0;
     font-size: 16px;
+    font-family: Fredoka;
+    padding-left: 50px;
+    transition: color 0.3s;
 }
 
 .nav-links a:hover {
@@ -102,34 +104,37 @@ section {
 .nav-icons {
     display: flex;
     align-items: center;
+    margin-right: 20px;
 }
 
 .nav-icons .icon {
     margin-left: 15px;
     position: relative;
-    /* Pour la barre de recherche */
+
 }
 
 .nav-icons .icon i {
     font-size: 1.5em;
-    /* Taille des icônes */
-    color: var(--beige);
-    /* text-decoration: none !important; */
+    color: #FFFAE0;
+    text-decoration: none; 
+    transition: color 0.3s;
 }
 
 .icon i:hover,
-.search-icon i:hover,
-footer i:hover {
-    color: #F6EDC2;
+.search-icon i:hover{
+    color: #EB7A57;
     text-decoration: none;
 }
 
-/* ****************barre de recherche**** */
+.tab-bar {
+    display: none;
+}
+
+/*****************barre de recherche*****************/
 .search-container {
     position: relative;
     display: flex;
     align-items: center;
-    /* Centre verticalement les éléments */
 }
 
 .search-box {
@@ -141,72 +146,63 @@ footer i:hover {
     cursor: text;
     background: transparent;
     color: transparent;
-    /* Masque le texte lorsqu'il n'est pas en focus */
     padding-left: 40px;
-    /* Espace pour l'icône de recherche */
     text-indent: -5000px;
-    /* Cache le texte dans la barre de recherche lorsqu'elle n'est pas en focus */
 }
 
 .search-box:focus {
     border: none;
     outline: none;
-    box-shadow: 0 0 0 2px var(--beige);
-    /* Couleur de l'ombre au focus */
+    box-shadow: 0 0 0 2px #FFFAE0;
 }
 
 .search-box.active {
     width: 300px;
     border-radius: 20px;
-    background: #001429;
-    color: var(--beige);
+    background: #EB7A57;
+    color: #FFFAE0;
     text-indent: 0;
-    /* Affiche le texte lorsqu'elle est en focus */
     padding-left: 40px;
 }
 
 .search-icon {
     position: absolute;
     left: 10px;
-    /* Ajuste la position horizontale de l'icône de recherche */
     top: 54%;
     transform: translateY(-50%);
     cursor: pointer;
 }
 
 .search-icon i {
-    color: var(--beige);
+    color: #FFFAE0;
     font-size: 1.5rem;
 }
 
 /* Styles pour le menu déroulant */
 .account {
     position: relative;
-    /* Pour positionner le sous-menu par rapport à .account */
 }
 
 .sub-menus {
     position: absolute;
-    top: 144%;
-    /* Positionner le sous-menu directement sous le parent */
-    right: 0;
-    /* Aligner le sous-menu avec le bord droit de l'icône */
-    width: 200px;
-    /* Largeur du sous-menu */
-    background: #001D3D;
+    top: 144%; /* Positionner le sous-menu directement sous le parent */
+    right: 0;  /* Aligner le sous-menu avec le bord droit de l'icône */
+    width: 200px; /* Largeur du sous-menu */
+    background: #001429;
     z-index: 99;
-    display: none;
-    /* Masqué par défaut */
+    display: none; /* Masqué par défaut */
     transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
     opacity: 0;
     visibility: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.594);
 }
-
+.sub-menus hr{
+    border: solid 1px #FFFAE0;
+    margin-inline: 10%;
+}
 .sub-menus.active {
-    display: block;
-    /* Affiche le sous-menu */
-    opacity: 1;
-    /* Assure une transition en douceur */
+    display: block; /* Affiche le sous-menu */
+    opacity: 1; /* Assure une transition en douceur */
     visibility: visible;
 }
 
@@ -215,29 +211,24 @@ footer i:hover {
 }
 
 .sub-menus a {
-    color: var(--beige);
+    color: #FFFAE0;
     font-size: 16px;
+    font-family: Fredoka;
     display: flex;
     align-items: center;
     text-decoration: none;
     padding: 20px 15px;
-    /* Espacement interne des liens */
 }
 
 .sub-menus a:hover {
-    background: #E28B70;
-    color: #FACA78;
+    color: #EB7A57;
 }
 
 .sub-menus i {
-    padding-right: 10px;
-    /* Espacement entre l'image et le texte */
+    padding-right: 10px; /* Espacement entre l'image et le texte */
     font-size: 1.5rem;
 }
 
-.tab-bar {
-    display: none;
-}
 
 /************ VIDEO PLAYER BOX ************/
 /* Police de l'écriture de la vidéo */
@@ -501,7 +492,7 @@ video::-webkit-media-controls-enclosure {
     font-style: normal;
     color: var(--beige);
     font-size: var(--font-size-title);
-    margin: 25px 0px;
+    margin-top: 75px;
     letter-spacing: 2px;
 }
 
@@ -553,7 +544,6 @@ select:focus {
     flex-direction: row;
     gap: 20px;
     width: fit-content;
-    */
     /*ajustement au niveau du contenu au lieu du conteneur*/
 }
 
@@ -582,14 +572,19 @@ select:focus {
 } */
 
 /************ COMMENTAIRES ************/
-
+#commentaires{
+    width: 90%;
+}
+#description{
+    width: 90%;
+}
 #commentaires h2 {
     font-family: "Bangers", system-ui;
     font-weight: 400;
     font-style: normal;
     color: var(--beige);
     font-size: var(--font-size-title);
-    margin: 25px 0px;
+    margin-top: 75px;
     letter-spacing: 2px;
 }
 
@@ -639,6 +634,7 @@ select:focus {
 }
 
 /************ VOTRE AVIS ************/
+
 #votre-avis h2 {
     font-family: "Bangers", system-ui;
     font-weight: 400;
@@ -647,6 +643,7 @@ select:focus {
     font-size: var(--font-size-title);
     margin: 25px 0px;
     letter-spacing: 2px;
+    margin-left: 5%;
 }
 
 #votre-avis p {
@@ -659,14 +656,14 @@ select:focus {
 }
 
 #votre-avis .user-comment-row {
-    margin: 0px 0px 20px 0px;
+    margin: 0px 0px 20px 5%;
 }
 
 textarea {
     color: var(--beige);
     background-color: #001429;
     opacity: 0.75;
-    width: 100%;
+    width: 90%;
     height: 230px;
     resize: none;
     /*retire l'element qui permet d'agrandir la text area*/
@@ -678,6 +675,7 @@ textarea {
     font-weight: 400;
     font-size: var(--font-size-paragraph);
     line-height: 1.5;
+    margin-left: 5%;
 }
 
 textarea:hover {
@@ -698,7 +696,7 @@ button[type="submit"] {
     background-color: var(--dark-blue);
     color: var(--beige);
     text-decoration: none;
-    border: 2px solid var(--beige);
+    border: 1.5px solid var(--beige);
     padding: 0.5rem 1.5rem;
     border-radius: 4px;
     display: block;
@@ -710,6 +708,7 @@ button[type="submit"] {
 button[type="submit"]:hover,
 button[type="submit"]:focus {
     border-color: var(--corail);
+    color: #EB7A57;
 }
 
 /************ NOS SUGGESTIONS ************/
@@ -719,25 +718,18 @@ button[type="submit"]:focus {
     font-style: normal;
     color: var(--beige);
     font-size: var(--font-size-title);
-    margin: 25px 0px;
+    margin: 50px 0 30px 5%;
     letter-spacing: 2px;
 }
 
 /************ FOOTER ************/
-footer p {
-    font-family: "Fredoka", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
-    font-size: var(--font-size-paragraph);
-}
-
 footer {
     height: 300px;
-    background-color: var(--dark-blue);
+    background-color: #001D3D;
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
 }
 
 footer img {
@@ -758,20 +750,37 @@ footer img {
 #liste-footer p {
     margin: 0;
     padding: 10px;
-    color: var(--beige);
+    color: #FFFAE0;
+    font-family: Fredoka;
+    font-size: 16px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+#liste-footer p:hover {
+    color: #EB7A57;
 }
 
 footer i {
     font-size: 30px;
-    color: var(--beige);
+    color: #FFFAE0;
     padding: 10px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+footer i:hover {
+    color: #EB7A57;
 }
 
 footer p {
-    color: var(--beige);
+    color: #FFFAE0;
     margin-top: 20px;
+    font-family: Fredoka;
 }
-
+footer a{
+    text-decoration: none;
+}
 /************ RESPONSIVE ************/
 @media (max-width: 767px) {
 

@@ -61,28 +61,28 @@ hr{
     align-items: center;
     padding-block: 10px;
     padding-inline: 20px 0px;
-    background: linear-gradient(to right, #000, transparent);
-    height: 60px;
-    position: fixed; /* Fixe la navbar en haut de la page */
+    background: linear-gradient( #001429, transparent);
+    height: 80px;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 1000; /* Assure que la navbar est au-dessus des autres éléments */
+    z-index: 1000;
 }
 
 /* Styles pour le logo à gauche */
 .logo img {
-    width: 3.5em; /* Taille du logo */
+    width: 4em;
 }
 
 /* Centrage des liens de navigation */
 .nav-links {
     display: flex;
-    justify-content: flex-start;
-    flex-grow: 1;
-    list-style: none;
-    gap: 3rem;
-    margin-inline: 3rem;
+    justify-content:flex-start;
+  flex-grow: 1;
+}
+.nav-links i{
+    padding-right: 3px;
 }
 
 .nav-links li {
@@ -96,39 +96,50 @@ hr{
     text-decoration: none;
     color: #FFFAE0;
     font-size: 16px;
+    font-family: Fredoka;
+    padding-left: 50px;
+    transition: color 0.3s;
 }
 
 .nav-links a:hover {
-    color: #E28B70;
+    color: #EB7A57;
 }
 
 /* Alignement des icônes à droite */
 .nav-icons {
     display: flex;
     align-items: center;
+    margin-right: 20px;
 }
 
 .nav-icons .icon {
     margin-left: 15px;
-    position: relative; /* Pour la barre de recherche */
+    position: relative;
+
 }
 
 .nav-icons .icon i {
-    font-size: 1.5em; /* Taille des icônes */
+    font-size: 1.5em;
     color: #FFFAE0;
-    /* text-decoration: none !important; */
+    text-decoration: none; 
+    transition: color 0.3s;
 }
 
-.icon i:hover,.search-icon i:hover, footer i:hover{
+.icon i:hover,
+.search-icon i:hover{
     color: #EB7A57;
     text-decoration: none;
 }
 
-/* ****************barre de recherche**** */
+.tab-bar {
+    display: none;
+}
+
+/*****************barre de recherche*****************/
 .search-container {
     position: relative;
     display: flex;
-    align-items: center; /* Centre verticalement les éléments */
+    align-items: center;
 }
 
 .search-box {
@@ -139,42 +150,42 @@ hr{
     border: none;
     cursor: text;
     background: transparent;
-    color: transparent; /* Masque le texte lorsqu'il n'est pas en focus */
-    padding-left: 40px; /* Espace pour l'icône de recherche */
-    text-indent: -5000px; /* Cache le texte dans la barre de recherche lorsqu'elle n'est pas en focus */
+    color: transparent;
+    padding-left: 40px;
+    text-indent: -5000px;
 }
 
 .search-box:focus {
     border: none;
     outline: none;
-    box-shadow: 0 0 0 2px #F6EDC2; /* Couleur de l'ombre au focus */
+    box-shadow: 0 0 0 2px #FFFAE0;
 }
 
 .search-box.active {
     width: 300px;
     border-radius: 20px;
-    background: #001D3D;
-    color: #F6EDC2;
-    text-indent: 0; /* Affiche le texte lorsqu'elle est en focus */
+    background: #EB7A57;
+    color: #FFFAE0;
+    text-indent: 0;
     padding-left: 40px;
 }
 
 .search-icon {
     position: absolute;
-    left: 10px; /* Ajuste la position horizontale de l'icône de recherche */
+    left: 10px;
     top: 54%;
     transform: translateY(-50%);
     cursor: pointer;
 }
 
-.search-icon i{
-    color: #F6EDC2;
+.search-icon i {
+    color: #FFFAE0;
     font-size: 1.5rem;
 }
 
 /* Styles pour le menu déroulant */
 .account {
-    position: relative; /* Pour positionner le sous-menu par rapport à .account */
+    position: relative;
 }
 
 .sub-menus {
@@ -182,14 +193,18 @@ hr{
     top: 144%; /* Positionner le sous-menu directement sous le parent */
     right: 0;  /* Aligner le sous-menu avec le bord droit de l'icône */
     width: 200px; /* Largeur du sous-menu */
-    background: #F6EDC2;
+    background: #001429;
     z-index: 99;
     display: none; /* Masqué par défaut */
     transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
     opacity: 0;
     visibility: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.594);
 }
-
+.sub-menus hr{
+    border: solid 1px #FFFAE0;
+    margin-inline: 10%;
+}
 .sub-menus.active {
     display: block; /* Affiche le sous-menu */
     opacity: 1; /* Assure une transition en douceur */
@@ -201,22 +216,28 @@ hr{
 }
 
 .sub-menus a {
-    color: #F6EDC2;
+    color: #FFFAE0;
     font-size: 16px;
+    font-family: Fredoka;
     display: flex;
     align-items: center;
     text-decoration: none;
-    padding: 20px 15px; /* Espacement interne des liens */
+    padding: 20px 15px;
 }
 
 .sub-menus a:hover {
-    background: #EB7A57;
-    color: #F6EDC2;
+    color: #EB7A57;
 }
 
 .sub-menus i {
     padding-right: 10px; /* Espacement entre l'image et le texte */
     font-size: 1.5rem;
+}
+
+
+
+.account {
+    position: relative; /* Pour positionner le sous-menu par rapport à .account */
 }
 
 /*****************carrousel***********/
@@ -402,7 +423,7 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 3rem;
+    width: 100%;
 }
 
 footer img {
@@ -423,25 +444,37 @@ footer img {
 #liste-footer p {
     margin: 0;
     padding: 10px;
-    color: #F6EDC2;
+    color: #FFFAE0;
+    font-family: Fredoka;
+    font-size: 16px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+#liste-footer p:hover {
+    color: #EB7A57;
 }
 
 footer i {
     font-size: 30px;
-    color: #F6EDC2;
+    color: #FFFAE0;
     padding: 10px;
+    cursor: pointer;
+    transition: color 0.3s;
 }
 
-footer i:hover{
+footer i:hover {
     color: #EB7A57;
 }
 
 footer p {
-    color: #F6EDC2;
+    color: #FFFAE0;
     margin-top: 20px;
+    font-family: Fredoka;
 }
-
-
+footer a{
+    text-decoration: none;
+}
 .serie-card {
     display: inline-block;
     width: 150px;
@@ -460,54 +493,7 @@ footer p {
 }
 
 /** mode enfants**/
-.mode-enfant{
-    background: no-repeat url(/RetroToon/assets/images/backgroundnew.png);
-   /*  position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%; / La vidéo occupe toute la largeur de l'écran /
-    height: 100%; / La vidéo occupe toute la hauteur de l'écran /
-    object-fit: cover; / Assure que la vidéo couvre tout l'écran /
-    z-index: -1; / Met la vidéo en arrière-plan */
-}
 
-.mode-enfant h1{
-color: #68C7C1;
-}
-.mode-enfant h2{
-    color: #EB7A57;
-}
-.mode-enfant .paragraphe{
-    color: #774836;
-}
-.mode-enfant .paragraphe a{
-    color: #774836;
-}
-.mode-enfant .checkbox-container p{
-    color: #774836;
-}
-.mode-enfant .checkbox-container input[type="checkbox"]{
-    border: solid #774836 2px;
-}
-.mode-enfant .container-formulaire input{
-    background-color: #68C7C1;
-    color: #774836;
-}
-.mode-enfant .container-formulaire textarea{
-    background-color: #68C7C1;
-    color: #774836;
-}
-.mode-enfant .boutton-container button{
-    background-color: #68C7C1;
-    color: #774836;
-}
-.mode-enfant .checkbox-container input[type="checkbox"] {
-    border: 2px solid #774836; 
-    background-color: #F6EDC2;
-}
-.mode-enfant .checkbox-container input[type="checkbox"]:checked {
-    background-color: #774836; 
-}
 
 @media (max-width: 767px) {
 .tab-bar {

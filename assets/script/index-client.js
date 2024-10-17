@@ -53,7 +53,23 @@ function toggleMute() {
 
 // API TMDB
 const API_KEY = 'abedd43cf8d6083e8a33eafb9cc8b3f4';
+const seriesIds = [4622, 1618, 20353, 72377, 2808];
 
+// Sélectionnez l'élément HTML où vous voulez afficher le lien
+const linkContainer = document.getElementById('links-container');
+
+// Vérifiez si l'ID 2808 est présent dans le tableau
+if (seriesIds.includes(2808)) {
+    // Créez un élément de lien (anchor) en HTML
+    const link = document.createElement('a');
+    link.href = 'fiche-dessin-anime.html'; // Lien vers votre autre page HTML
+    link.textContent = '*'; // Texte du lien
+    link.style.color = '#001D3D';
+    link.target = '_blank'; // Ouvre le lien dans un nouvel onglet (optionnel)
+
+    // Ajoutez le lien au conteneur
+    linkContainer.appendChild(link);
+}
 //Carousel historique
 // Gestion du carrousel des séries historiques (flèches désactivées)
 document.addEventListener('DOMContentLoaded', function () {
@@ -63,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const apiUrlBase = `https://api.themoviedb.org/3/tv/`;
 
     let allSeries = [];
-
+    
     // Fonction pour récupérer les séries sans async/await
     function fetchShows() {
         const seriesPromises = seriesIds.map(id => 
@@ -80,7 +96,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.error('Erreur lors de la récupération des séries :', error);
             });
     }
-
     // Fonction pour afficher les séries dans le conteneur
     function showItems(startIndex = 0) {
         if (!allSeries || allSeries.length === 0) {

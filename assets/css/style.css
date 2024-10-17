@@ -294,7 +294,9 @@ footer p {
     margin-top: 20px;
     font-family: Fredoka;
 }
-
+footer a{
+    text-decoration: none;
+}
 
 /* responsive mobile */
 @media (max-width: 767px) {
