@@ -42,7 +42,7 @@ const apiUrlBase = `https://api.themoviedb.org/3/discover/tv?api_key=${API_KEY}&
 // Fonction pour récupérer les séries avec les filtres sélectionnés
 function fetchSeries(page = 1) {
     let apiUrl = `${apiUrlBase}&page=${page}`;
-    
+
     // Ajouter le genre sélectionné s'il existe (exclut les genres non-animation)
     if (selectedGenre) {
         apiUrl += `&with_genres=16,${selectedGenre}`; // Genre d'animation + genre secondaire
@@ -244,128 +244,128 @@ document.addEventListener('DOMContentLoaded', () => {
 // **********Page films****************
 
 
+// Variables pour les films
+document.addEventListener('DOMContentLoaded', () => {
+    const API_KEY = 'abedd43cf8d6083e8a33eafb9cc8b3f4';
+
     // Variables pour les films
-    document.addEventListener('DOMContentLoaded', () => {
-        const API_KEY = 'abedd43cf8d6083e8a33eafb9cc8b3f4';
+    let selectedGenreFilm = '';
+    let selectedAnneeFilm = '';
+    let currentPageFilm = 1;
+    let totalPagesFilm = 1;
 
-        // Variables pour les films
-        let selectedGenreFilm = '';  
-        let selectedAnneeFilm = '';   
-        let currentPageFilm = 1;      
-        let totalPagesFilm = 1;       
+    const containerFilms = document.getElementById('films');
 
-        const containerFilms = document.getElementById('films');
+    // URL de base pour récupérer les films d'animation
+    const apiUrlBaseFilms = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=16&primary_release_date.gte=1970-01-01&primary_release_date.lte=2010-12-31&language=fr`;
 
-        // URL de base pour récupérer les films d'animation
-        const apiUrlBaseFilms = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=16&primary_release_date.gte=1970-01-01&primary_release_date.lte=2010-12-31&language=fr`;
+    // Fonction pour récupérer les films avec les filtres sélectionnés
+    function fetchFilms(page = 1) {
+        let apiUrl = `${apiUrlBaseFilms}&page=${page}`;
 
-        // Fonction pour récupérer les films avec les filtres sélectionnés
-        function fetchFilms(page = 1) {
-            let apiUrl = `${apiUrlBaseFilms}&page=${page}`;
-
-            // Ajouter le genre sélectionné s'il existe (exclut les genres non-animation)
-            if (selectedGenreFilm) {
-                apiUrl += `&with_genres=16,${selectedGenreFilm}`; 
-            }
-
-            // Ajouter les filtres d'année
-            if (selectedAnneeFilm) {
-                const [startYear, endYear] = selectedAnneeFilm.split(',');
-                apiUrl += `&primary_release_date.gte=${startYear}&primary_release_date.lte=${endYear}`;
-            }
-
-            return fetch(apiUrl)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Erreur lors de la récupération des données');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    totalPagesFilm = data.total_pages;
-                    currentPageFilm = page;
-
-                    const filmsList = data.results.map(film => ({
-                        title: film.title,
-                        year: film.release_date ? film.release_date.split('-')[0] : 'Année inconnue',
-                        affiche: film.poster_path ? `https://image.tmdb.org/t/p/w500${film.poster_path}` : 'https://via.placeholder.com/500x750?text=Image+non+disponible',
-                        popularity: film.popularity,
-                        tmdbId: film.id
-                    }));
-
-                    console.log(filmsList); // Affichez les données de films dans la console
-                    displayFilms(filmsList);
-                    updatePaginationFilm();
-                })
-                .catch(error => {
-                    console.error('Erreur lors de la récupération des films:', error);
-                    containerFilms.innerHTML = '<p>Erreur lors de la récupération des films.</p>';
-                });
+        // Ajouter le genre sélectionné s'il existe (exclut les genres non-animation)
+        if (selectedGenreFilm) {
+            apiUrl += `&with_genres=16,${selectedGenreFilm}`;
         }
 
-        // Fonction pour afficher les films
-        function displayFilms(films) {
-            const sortedFilms = films.sort((a, b) => b.popularity - a.popularity);
-            containerFilms.innerHTML = '';
-            sortedFilms.forEach(film => {
-                const card = document.createElement('div');
-                card.classList.add('card');
-                card.innerHTML = `
+        // Ajouter les filtres d'année
+        if (selectedAnneeFilm) {
+            const [startYear, endYear] = selectedAnneeFilm.split(',');
+            apiUrl += `&primary_release_date.gte=${startYear}&primary_release_date.lte=${endYear}`;
+        }
+
+        return fetch(apiUrl)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erreur lors de la récupération des données');
+                }
+                return response.json();
+            })
+            .then(data => {
+                totalPagesFilm = data.total_pages;
+                currentPageFilm = page;
+
+                const filmsList = data.results.map(film => ({
+                    title: film.title,
+                    year: film.release_date ? film.release_date.split('-')[0] : 'Année inconnue',
+                    affiche: film.poster_path ? `https://image.tmdb.org/t/p/w500${film.poster_path}` : 'https://via.placeholder.com/500x750?text=Image+non+disponible',
+                    popularity: film.popularity,
+                    tmdbId: film.id
+                }));
+
+                console.log(filmsList); // Affichez les données de films dans la console
+                displayFilms(filmsList);
+                updatePaginationFilm();
+            })
+            .catch(error => {
+                console.error('Erreur lors de la récupération des films:', error);
+                containerFilms.innerHTML = '<p>Erreur lors de la récupération des films.</p>';
+            });
+    }
+
+    // Fonction pour afficher les films
+    function displayFilms(films) {
+        const sortedFilms = films.sort((a, b) => b.popularity - a.popularity);
+        containerFilms.innerHTML = '';
+        sortedFilms.forEach(film => {
+            const card = document.createElement('div');
+            card.classList.add('card');
+            card.innerHTML = `
                     <img src="${film.affiche}" alt="${film.title}" onerror="this.onerror=null; this.src='https://via.placeholder.com/500x750?text=Image+non+disponible'">
                     <div>
                         <p>${film.title}</p>
                         <p>${film.year}</p>
                     </div>
                 `;
-                containerFilms.appendChild(card);
-            });
-        }
-
-        // Mettre à jour l'affichage de la pagination pour les films
-        function updatePaginationFilm() {
-            document.getElementById('current-page-films').textContent = `Page ${currentPageFilm}`;
-            document.getElementById('prev-page-films').disabled = currentPageFilm === 1;
-            document.getElementById('next-page-films').disabled = currentPageFilm === totalPagesFilm;
-        }
-
-        // Événements pour les filtres des films
-        document.getElementById('filter-all-films').addEventListener('click', () => {
-            selectedGenreFilm = ''; 
-            selectedAnneeFilm = ''; 
-            currentPageFilm = 1; 
-            fetchFilms(currentPageFilm); 
+            containerFilms.appendChild(card);
         });
+    }
 
-        document.getElementById('filter-genre-films').addEventListener('change', (event) => {
-            selectedGenreFilm = event.target.value; 
-            currentPageFilm = 1; 
-            fetchFilms(currentPageFilm); 
-        });
+    // Mettre à jour l'affichage de la pagination pour les films
+    function updatePaginationFilm() {
+        document.getElementById('current-page-films').textContent = `Page ${currentPageFilm}`;
+        document.getElementById('prev-page-films').disabled = currentPageFilm === 1;
+        document.getElementById('next-page-films').disabled = currentPageFilm === totalPagesFilm;
+    }
 
-        document.getElementById('filter-annees-films').addEventListener('change', (event) => {
-            selectedAnneeFilm = event.target.value; 
-            currentPageFilm = 1; 
-            fetchFilms(currentPageFilm); 
-        });
-
-        // Événements pour la pagination des films
-        document.getElementById('prev-page-films').addEventListener('click', () => {
-            if (currentPageFilm > 1) {
-                currentPageFilm--;
-                fetchFilms(currentPageFilm); 
-            }
-        });
-
-        document.getElementById('next-page-films').addEventListener('click', () => {
-            if (currentPageFilm < totalPagesFilm) {
-                currentPageFilm++;
-                fetchFilms(currentPageFilm); 
-            }
-        });
-
-        // Appeler la fonction pour charger et afficher les films d'animation au chargement de la page
+    // Événements pour les filtres des films
+    document.getElementById('filter-all-films').addEventListener('click', () => {
+        selectedGenreFilm = '';
+        selectedAnneeFilm = '';
+        currentPageFilm = 1;
         fetchFilms(currentPageFilm);
     });
+
+    document.getElementById('filter-genre-films').addEventListener('change', (event) => {
+        selectedGenreFilm = event.target.value;
+        currentPageFilm = 1;
+        fetchFilms(currentPageFilm);
+    });
+
+    document.getElementById('filter-annees-films').addEventListener('change', (event) => {
+        selectedAnneeFilm = event.target.value;
+        currentPageFilm = 1;
+        fetchFilms(currentPageFilm);
+    });
+
+    // Événements pour la pagination des films
+    document.getElementById('prev-page-films').addEventListener('click', () => {
+        if (currentPageFilm > 1) {
+            currentPageFilm--;
+            fetchFilms(currentPageFilm);
+        }
+    });
+
+    document.getElementById('next-page-films').addEventListener('click', () => {
+        if (currentPageFilm < totalPagesFilm) {
+            currentPageFilm++;
+            fetchFilms(currentPageFilm);
+        }
+    });
+
+    // Appeler la fonction pour charger et afficher les films d'animation au chargement de la page
+    fetchFilms(currentPageFilm);
+});
 
 
 
@@ -392,14 +392,14 @@ let filterType = 'all'; // Type de filtre par défaut
 
 // Obtenez les configurations d'image au chargement de la page
 fetch(`https://api.themoviedb.org/3/configuration?api_key=${API_KEY}`)
-  .then(response => response.json())
-  .then(data => {
-    _imageBaseUrl = data.images.base_url;
-    _imageSizes = data.images.poster_sizes;
-  })
-  .catch(error => console.error('Erreur lors de la récupération des configurations :', error));
+    .then(response => response.json())
+    .then(data => {
+        _imageBaseUrl = data.images.base_url;
+        _imageSizes = data.images.poster_sizes;
+    })
+    .catch(error => console.error('Erreur lors de la récupération des configurations :', error));
 
-  document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
     const query = new URLSearchParams(window.location.search).get('query');
     const filter = new URLSearchParams(window.location.search).get('filter') || 'all'; // Par défaut 'all'
 
@@ -524,68 +524,27 @@ function getMoviePoster(imagePath) {
     if (!_imageBaseUrl || !_imageSizes || _imageSizes.length === 0) {
         return 'https://via.placeholder.com/200x300?text=No+Image';
     }
-    return `${_imageBaseUrl}${_imageSizes[2]}${imagePath}`; // Utiliser la taille d'image par défaut
-}
 
-
-// Charger les résultats basés sur la requête URL
-function loadResults() {
-    const query = getQueryParam('query');
-    if (query) {
-        search(query);
-    }
-}
-
-// *************************barre de recherche
-document.addEventListener('DOMContentLoaded', () => {
-    const searchIcon = document.querySelector('.search-icon');
-    const searchBox = document.getElementById('search-box');
-    const filterAllButton = document.getElementById('filter-all');
-    const filterAnimationButton = document.getElementById('filter-animation');
-    const filterMoviesButton = document.getElementById('filter-movies');
-    let filterType = 'all'; // Type de filtre par défaut
-
-    // Bascule la visibilité de la barre de recherche lors du clic sur l'icône
-    searchIcon.addEventListener('click', () => {
-        searchBox.classList.toggle('active'); // Ajoute ou supprime la classe active
-        searchBox.focus(); // Focalise la barre de recherche pour permettre la saisie de texte
-    });
-
-    // Gère l'événement "Enter" pour déclencher la recherche avec le filtre actuel
-    searchBox.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter') {
-            event.preventDefault(); // Empêche le rechargement de la page
-            const searchQuery = searchBox.value.trim(); // Récupère la valeur de la barre de recherche
-            if (searchQuery) {
-                // Redirige vers la page des résultats avec la requête de recherche et le filtre
-                window.location.href = `resultas-barre-de-recherche.html?query=${encodeURIComponent(searchQuery)}&filter=${filterType}`;
-            }
+    // Gestionnaire d'événements pour le bouton suivant
+    nextButton.addEventListener('click', () => {
+        if (currentSlide < slides.length - 1) {
+            currentSlide++;
+        } else {
+            currentSlide = 0; // Revenir à la première diapositive
         }
+        updateSlidePosition();
     });
 
-    // Gestion des filtres pour la recherche
-    function applyFilter(newFilterType) {
-        filterType = newFilterType;
-        const searchQuery = searchBox.value.trim(); // Récupère la valeur actuelle de la barre de recherche
-        if (searchQuery) {
-            // Redirige vers la page des résultats avec la requête de recherche et le filtre appliqué
-            window.location.href = `resultas-barre-de-recherche.html?query=${encodeURIComponent(searchQuery)}&filter=${filterType}`;
+    // Gestionnaire d'événements pour le bouton précédent
+    prevButton.addEventListener('click', () => {
+        if (currentSlide > 0) {
+            currentSlide--;
+        } else {
+            currentSlide = slides.length - 1; // Revenir à la dernière diapositive
         }
-    }
-
-    // Événements de clic sur les boutons de filtre
-    filterAllButton.addEventListener('click', () => {
-        applyFilter('all');
+        updateSlidePosition();
     });
-
-    filterAnimationButton.addEventListener('click', () => {
-        applyFilter('animation');
-    });
-
-    filterMoviesButton.addEventListener('click', () => {
-        applyFilter('movies');
-    });
-});
+};
 
 
 // Événements de soumission et de recherche

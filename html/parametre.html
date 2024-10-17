@@ -20,7 +20,7 @@
             <!-- Logo à gauche -->
             <div class="logo">
                 <a href="index.html">
-                    <img src="/assets/imgParametre/Design_sans_titre-removebg-preview 2.png" alt="Logo">
+                    <img src="/assets/images/Design_sans_titre-removebg-preview 4.png" alt="Logo">
                 </a>
             </div>
 
@@ -29,8 +29,7 @@
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="series.html">Séries</a></li>
                 <li><a href="films.html">Films</a></li>
-                <li><a href="annees.html">Années</a></li>
-                <li><a href="parametre.html#content2">Favoris</a></li>
+                <li><a href="#"><i class="fi fi-tr-teddy-bear"></i>Enfants</a></li>
             </ul>
 
             <!-- Icônes à droite -->
@@ -39,292 +38,159 @@
                     <input id="search-box" type="text" class="search-box" name="q" />
                     <label for="search-box"><span class="search-icon"><i class="fi fi-rr-search"></i></span></label>
                 </form>
-                <a href="#" class="icon" style="text-decoration: none;"><i class="fi fi-rr-globe"></i></a>
+                <a href="#" class="icon" style="text-decoration: none;"><i class="fi fi-rr-heart"></i></a>
                 <div class="account">
                     <a href="#" class="icon dropdown-arrow" id="accountToggle">
                         <i class="fa-solid fa-user"></i>
                     </a>
 
                     <ul class="sub-menus" id="accountSubMenu">
-                        <li onclick="modeEnfant()"><a href='#'><i class="fi fi-rr-child-head"></i>Mode enfant</a></li>
+                        <li onclick="modeEnfant()"><a href='/html/profil.html'><i class="fa-solid fa-user-pen text-dark-emphasis"></i>Gestion profil</a></li>
                         <hr>
-                        <li><a href='parametre.html'><i class="fi fi-rr-settings"></i>Paramètres</a></li>
+                        <li><a href='/parametre.html'><i class="fi fi-rr-settings"></i>Paramètres</a></li>
                         <hr>
-                        <li><a href='parametre.html#content2'><i class="fi fi-rr-heart"></i>Favoris</a></li>
-                        <hr>
-                        <li><a href='#'><i class="fi fi-rr-exit"></i>Déconnexion</a></li>
+                        <li><a href='/html/index.html'><i class="fi fi-rr-exit"></i>Déconnexion</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-
     <div class="tab-bar">
         <a href="index.html"><i class="fa-solid fa-house"></i></a>
-        <a href="films.html"><i class="fi fi-rr-clapperboard-play"></i></a>
-        <a href="series.html"><i class="fi fi-rr-tv-retro"></i></a>
-        <a href="annees.html"><i class="fi fi-rr-90s-music-disc"></i></i></a>
-        <a href="parametre.html#content2"><i class="fi fi-rr-heart"></i></a>
+        <a href="#"><i class="fi fi-rr-clapperboard-play"></i></a>
+        <a href="#"><i class="fi fi-rr-tv-retro"></i></a>
+        <a href="years.html"><i class="fi fi-rr-90s-music-disc"></i></i></a>
+        <a href="#"><i class="fi fi-rr-heart"></i></a>
         <a href="#" class="icon dropdown-arrow" id="accountToggle">
             <i class="fa-solid fa-user"></i>
         </a>
     </div>
-    </header>
-    
-    <div class="tab-bar">
-        <a href="index.html"><i class="fa-solid fa-house"></i></a>
-        <a href="films.html"><i class="fi fi-rr-clapperboard-play"></i></a>
-        <a href="series.html"><i class="fi fi-rr-tv-retro"></i></a>
-        <a href="annees.html"><i class="fi fi-rr-90s-music-disc"></i></i></a>
-        <a href="parametre.html#content2"><i class="fi fi-rr-heart"></i></a>
-        <a href="#" class="icon dropdown-arrow" id="accountToggle">
-            <i class="fa-solid fa-user"></i>
-        </a>
-    </div>
-
     <main>
-        <div class="utilisateur">
-            <div id="mobile">
-                <img src="/assets/imgParametre/utilisateur_account.png" alt="account">
-                <p style="color: #faca78;"><i class="fa-solid fa-user-pen" style="color: #faca78;"></i>Gérer les profils
-                </p>
-            </div>
-            <h4>utilisateur-1</h4>
+        <!----------------------SANA-------------------------------->
+        <div class="hautPage">
+            <h1>PARAMETRE DU COMPTE</h1>
         </div>
-        <div class="container-bouton">
-            <button class="accordion underline-on-hover" id="scrollBtn" onclick="toggleContent('content1')">Mes
-                infos</button>
-            <button class="accordion underline-on-hover" id="scrollBtn" onclick="toggleContent('content2')">Mes
-                favoris</button>
-            <button class="accordion underline-on-hover" id="scrollBtn" onclick="toggleContent('content3')">Mes
-                commentaires</button>
-            <button class="accordion underline-on-hover" id="scrollBtn" onclick="toggleContent('content4')">Mon
-                historique</button>
-            <button class="accordion underline-on-hover" id="scrollBtn"
-                onclick="toggleContent('content5')">Paramètres</button>
-            <button class="accordion underline-on-hover" id="scrollBtn"
-                onclick="toggleContent('content6')">Contact</button>
-        </div>
-        <section id="content1" class="panel">
-            <ul>
-                <button class="gestion">Gestion du compte<i class="fa-solid fa-chevron-right"></i></button>
-                <div class="contenuCache">
+        <!---------------------- BOUTON -------------------------------->
+        <div class="containerParametre">
+            <section id="page-accueil" class="page active">
+                <div class="choixParametre" data-page="page-gestion-compte-1">
+                    <i class="fa-solid fa-user"></i>
+                    <p>Gestion du compte</p>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </div>
+                <div class="choixParametre" data-page="page-gestion-compte-2">
+                    <i class="fa-solid fa-key"></i>
+                    <p>Changer mon mot de passe</p>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </div>
+                <div class="choixParametre" data-page="page-gestion-compte-3">
+                    <i class="fa-solid fa-laptop"></i>
+                    <p>Gestion des appareils</p>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </div>
+                <div class="choixParametre" data-page="page-gestion-compte-4">
+                    <i class="fa-solid fa-ellipsis"></i>
+                    <p>Contrôle parental</p>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </div>
+                <div class="choixParametre" data-page="page-gestion-compte-5">
+                    <i class="fi fi-rr-info"></i>
+                    <p>Aide & Contact</p>
+                </div>
+                <div class="choixParametre" data-page="page-gestion-compte-6">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <p>Déconnexion</p>
+                </div>
+            </section>
+
+            <!-- Page cachée de gestion du compte -->
+            <section id="page-gestion-compte-1" class="page">
+                <div class="container-cache">
                     <h3>Modifier mes données personnelles</h3>
-                    <input type="text" placeholder="Prénom" id="">
-                    <input type="text" placeholder="Nom de famille" id="">
-                    <input type="date" id="">
-                    <input type="email" placeholder="Email" id="">
-                    <button id="save" type="submit">Sauvegarder les informations</button>
+                    <label for="nom">Nom</label>
+                    <input type="text">
+                    <label for="prenom">Prénom</label>
+                    <input type="text">
+                    <label for="date">Date de naissance</label>
+                    <input type="date">
+                    <label for="email">Nouveau email</label>
+                    <input type="email">
+                    <label for="confirmationEmail">Confirmation nouveau email</label>
+                    <input type="email">
+                    <button type="button">Sauvegarder les informations</button>
+                    <div class="retourPage" data-page="page-accueil">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <p>Retour</p>
+                    </div>
                 </div>
-                <button class="gestion">Changer mon mot de passe<i class="fa-solid fa-chevron-right"></i></button>
-                <div class="contenuCache">
-                    <h3>Modifier mon mot de passe actuel</h3>
-                    <input type="password" placeholder="Mot de passe actuel" id="">
-                    <input type="password" placeholder="Nouveau mot de passe" id="">
-                    <input type="password" placeholder="Confirmer le nouveau mot de passe" id="">
-                    <button id="save" type="submit">Sauvegarder les informations</button>
+            </section>
+
+
+            <!-- Page cachée pour changer le mot de passe -->
+            <section id="page-gestion-compte-2" class="page">
+                <div class="container-cache">
+                    <h3>Changement de mot de passe</h3>
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" autocomplete="email" required>
+                    <label for="motDePasseActuel">Mot de passe actuel</label>
+                    <input type="password" required>
+                    <label for="nouveauMotDePasse">Nouveau mot de passe</label>
+                    <input type="password" required>
+                    <label for="confirmationNouveauMotDePasse">Confirmation nouveau mot de passe</label>
+                    <input type="password" required>
+                    <button type="button">Changer le mot de passe</button>
+                    <div class="retourPage" data-page="page-accueil">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <p>Retour</p>
+                    </div>
                 </div>
-                <button class="gestion">Gestion de l'abonnement<i class="fa-solid fa-chevron-right"></i></button>
-                <div class="contenuCache">
-                    <h3>Détails d'abonnement du compte</h3>
-                    <p>Forfait : VIP</p>
-                    <p>Plan : Annuel</p>
-                    <button class="gestion">Afficher l'historique des transactions<i
-                            class="fa-solid fa-chevron-right"></i></button>
+            </section>
+            <!-- Page cachée pour gestion des appareils -->
+            <section id="page-gestion-compte-3" class="page">
+                <div class="container-cache">
+                    <h3>Appareils associés à votre compte</h3>
+                    <div class="gestionAppareil">
+                        <p>Android TV</p>
+                        <i class="fa-solid fa-pen"></i>
+                        <i class="fa-solid fa-trash-can"></i>
+                    </div>
+                    <div class="gestionAppareil">
+                        <p>user’s iPhone</p>
+                        <i class="fa-solid fa-pen"></i>
+                        <i class="fa-solid fa-trash-can"></i>
+                    </div>
+                    <div class="gestionAppareil">
+                        <p>Samsung</p>
+                        <i class="fa-solid fa-pen"></i>
+                        <i class="fa-solid fa-trash-can"></i>
+                    </div>
+                    <div class="retourPage" data-page="page-accueil">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <p>Retour</p>
+                    </div>
                 </div>
-                <button class="gestion">Gestion des appareils<i class="fa-solid fa-chevron-right"></i></button>
-                <div class="contenuCache">
-                    <h3>Appareils actuellement associés</h3>
-                    <p>Android TV</p>
-                    <p>User's iphone</p>
-                    <p>Samsung TV</p>
-                    <button id="save" type="submit">Associer un nouvel appareil</button>
+            </section>
+            <!-- Page cachée pour controle parental -->
+            <section id="page-gestion-compte-4" class="page">
+                <div class="container-cache">
+                    <h3>Contrôle parental</h3>
+                    <P id="p">Le code de contrôle parental vous aidera à mieux protéger vos enfants</P>
+                    <input id="code" type="number" inputmode="numeric" pattern="[0-9]\d{4}" length="4" placeholder=" * * * * ">
+                    <button id="saveCodeButton" type="button">Sauvegarder</button>
+                    <p id="message"></p> 
+                    <div class="retourPage" data-page="page-accueil">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <p>Retour</p>
+                    </div>
                 </div>
-                <button class="gestion">Controle parental<i class="fa-solid fa-chevron-right"></i></button>
-                <div class="contenuCache">
-                    <h3>Appareils connectés a votre compte</h3>
-                    <input type="password" placeholder="saisissez un mot de passe" id="">
-                    <button id="save" type="submit">Sauvegarder</button>
-                </div>
-            </ul>
-        </section>
-        <section id="content2" class="panel">
-            <div class="affiche">
-                <img src="/assets/imgParametre/scooby_doo_ou_es_tu.jpg" alt="affichage" height="150px"
-                    width="100px">
-                <div>
-                    <h2>Scooby-Doo</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut quae expedita sint
-                        debitis
-                        cumque.</p>
-                    <i class="fa-brands fa-gratipay"></i>
-                </div>
-            </div>
-            <div class="affiche">
-                <a href="fiche-dessin-anime.html">
-                    <img src="/assets/imgParametre/Totally-Spies-S1.jpg" alt="affichage" height="150px"
-                        width="100px">
-                </a>
-                <div>
-                    <h2>Totally-Spies</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut quae expedita sint
-                        debitis
-                        cumque.</p>
-                    <i class="fa-brands fa-gratipay"></i>
-                </div>
-            </div>
-            <div class="affiche">
-                <img src="/assets/imgParametre/kim possible.jpg" alt="affichage" height="150px" width="100px">
-                <div>
-                    <h2>Kim Possible</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut quae expedita sint
-                        debitis
-                        cumque.</p>
-                    <i class="fa-brands fa-gratipay"></i>
-                </div>
-            </div>
-            <div class="plus">
-                <p style="color: #EB7A57;">Cliquez ici pour afficher tout le contenu</p>
-                <a href="#/"><i class="fa-solid fa-chevron-down"></i></a>
-            </div>
-        </section>
-        <section id="content3" class="panel">
-            <div class="affiche">
-                <img src="/assets/imgParametre/Looney_Tunes_poster.jpg" alt="affichage" height="150px"
-                    width="100px">
-                <div>
-                    <h2>Looney Tunes</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut quae expedita sint
-                        debitis
-                        cumque.</p>
-                    <img class="etoile" src="/assets/imgParametre/Group 72.png" alt="etoile">
-                </div>
-            </div>
-            <div class="affiche">
-                <img src="/assets/imgParametre/la_panthere_rose.jpg" alt="affichage" height="150px"
-                    width="100px">
-                <div>
-                    <h2>La Panthere rose</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut quae expedita sint
-                        debitis
-                        cumque.</p>
-                    <img class="etoile" src="/assets/imgParametre/Group 72.png" alt="etoile">
-                </div>
-            </div>
-            <div class="affiche">
-                <img src="/assets/imgParametre/super-nanas.jpeg" alt="affichage" height="150px" width="100px">
-                <div>
-                    <h2>Les Super Nanas</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut quae expedita sint
-                        debitis
-                        cumque.</p>
-                    <img class="etoile" src="/assets/imgParametre/Group 72.png" alt="etoile">
-                </div>
-            </div>
-            <div class="plus">
-                <p style="color: #EB7A57;">Cliquez ici pour afficher tout le contenu</p>
-                <a href="#/"><i class="fa-solid fa-chevron-down"></i></a>
-            </div>
-        </section>
-        <section id="content4" class="panel">
-            <div class="affiche">
-                <img src="/assets/imgParametre/calimero.jpg" alt="affichage" height="150px" width="100px">
-                <div>
-                    <h2>Calimero et ses amis</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut quae expedita sint
-                        debitis
-                        cumque.</p>
-                    <i class="fa-solid fa-rotate-left"></i>
-                </div>
-            </div>
-            <div class="affiche">
-                <img src="/assets/imgParametre/Les_malheurs_de_Sophie_Saison_1.jpg" alt="affichage"
-                    height="150px" width="100px">
-                <div>
-                    <h2>Les malheurs de Sophie</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut quae expedita sint
-                        debitis
-                        cumque.</p>
-                    <i class="fa-solid fa-rotate-left"></i>
-                </div>
-            </div>
-            <div class="affiche">
-                <img src="/assets/imgParametre/maya_l_abeille.jpg" alt="affichage" height="150px"
-                    width="100px">
-                <div>
-                    <h2>Maya l'abeille</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut quae expedita sint
-                        debitis
-                        cumque.</p>
-                    <i class="fa-solid fa-rotate-left"></i>
-                </div>
-            </div>
-            <div class="plus">
-                <p style="color: #EB7A57;">Cliquez ici pour afficher tout le contenu</p>
-                <a href="#/"><i class="fa-solid fa-chevron-down"></i></a>
-            </div>
-        </section>
-        <section id="content5" class="panel">
-            <ul>
-                <button class="gestion">Notifications<i class="fa-solid fa-chevron-right"></i></button>
-                <div class="contenuCache">
-                    <p>Aucune nouvelle notification</p>
-                </div>
-                <button class="gestion">Qualité vidéo des téléchargements<i
-                        class="fa-solid fa-chevron-right"></i></button>
-                        <div class="contenuCache">
-                            <div class="check">
-                                <input type="radio" name="qualite" />
-                                <label for="qualiteElevee">Qualité élevée</label>
-                              </div>
-                              <div class="check">
-                                <input type="radio" name="qualite" />
-                                <label for="standard">Standard</label>
-                              </div>
-                        </div>
-                <button class="gestion">Offres spéciales<i class="fa-solid fa-chevron-right"></i></button>
-                <div class="contenuCache"></div>
-                <button class="gestion">Conditions générales d'utilisation<i
-                        class="fa-solid fa-chevron-right"></i></button>
-                        <div class="contenuCache"></div>
-                <button class="gestion">Politique de confidentialité<i class="fa-solid fa-chevron-right"></i></button>
-                <div class="contenuCache"></div>
-                    <button class="gestion">Déconnexion</button>
-                    <div class="contenuCache"></div>
-            </ul>
-        </section>
-        <section id="content6" class="panel">
-            <form class="container-formulaire" action="#" method="post">
-                <div>
-                    <h2>Nom</h2>
-                    <input type="text" name="last_name" placeholder="Nom" value="">
-                </div>
-                <div>
-                    <h2>Prenom</h2>
-                    <input type="text" name="first_name" placeholder="Prenom" value="">
-                </div>
-                <div>
-                    <h2>Email</h2>
-                    <input type="email" name="email" placeholder="Email" value="">
-                </div>
-                <br>
-                </div>
-                <h2>Votre message </h2>
-                <textarea name="message" id="" placeholder="Saisir votre message"></textarea>
-                </div>
-            </form>
-            <br>
-            <div>
-                <button id="save" type="submit">Envoyer</button>
-            </div>
-        </section>
+            </section>
+        </div>
     </main>
     <footer>
         <img src="/assets/imgParametre/Design_sans_titre-removebg-preview 2.png" alt="logo">
         <div id="liste-footer">
             <p>Accueil</p>
             <p>Nous contacter</p>
-            <p>Assistance</p>
             <p>Applications</p>
             <p>Conditions générales d'utilisation</p>
             <p>Politique de confidentialité</p>
