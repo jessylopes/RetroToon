@@ -7,7 +7,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/Design_sans_titre-removebg-preview 4.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@flaticon/flaticon-uicons/css/all/all.css">
-    <link rel="stylesheet" href="/assets/css/annees.css">
+    <link rel="stylesheet" href="/assets/css/series.css">
 
 </head>
 <body>
@@ -25,10 +25,6 @@
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="series.html">Séries</a></li>
                 <li><a href="films.html">Films</a></li>
-                <li><a href="annees.html">Années</a></li>
-                <li><a href="parametre.html#content2">Favoris</a></li>
-                <li><a href="years.html">Année</a></li>
-                <li><a href="/parametre.html#content2">Favoris</a></li>
             </ul>
 
             <!-- Icônes à droite -->
@@ -37,7 +33,7 @@
                     <input id="search-box" type="text" class="search-box" name="q" />
                     <label for="search-box"><span class="search-icon"><i class="fi fi-rr-search"></i></span></label>
                 </form>
-                <a href="#" class="icon" style="text-decoration: none;"><i class="fi fi-rr-globe"></i></a>
+                <a href="#" class="icon" style="text-decoration: none;"><i class="fi fi-rr-heart"></i></a>
                 <div class="account">
                     <a href="#" class="icon dropdown-arrow" id="accountToggle">
                         <i class="fa-solid fa-user"></i>
@@ -61,7 +57,6 @@
         <a href="index.html"><i class="fa-solid fa-house"></i></a>
         <a href="films.html"><i class="fi fi-rr-clapperboard-play"></i></a>
         <a href="series.html"><i class="fi fi-rr-tv-retro"></i></a>
-        <a href="annees.html"><i class="fi fi-rr-90s-music-disc"></i></i></a>
         <a href="parametre.html#content2"><i class="fi fi-rr-heart"></i></a>
         <a href="#" class="icon dropdown-arrow" id="accountToggle">
             <i class="fa-solid fa-user"></i>
@@ -71,216 +66,38 @@
     <main>
         <div class="entete">
             <h1>
-                Séries
+                <img src="/assets/images/Series.png" alt="" width="500">
             </h1>
-
-            <h3>
-                Plongez dans l'univers infini des séries animées cultes !
-            </h3>
         </div>
 
-        <section class="comedy">
-            <h2 data-genre="35">Comédie</h2>
-            <div class="carousel" id="carousel5">
-                <button class="carousel-control prev">&#8249;</button>
-                <div class="carousel-container">
-                    <div class="carousel-slide card">
-                        <img class="poster-comic" src=" alt="Affiche">
-                    </div>
+        <div class="filter-buttons">
+            <button id="filter-all">Tout</button>
 
-                    <div class="carousel-slide card">
-                        <img class="poster-comic" src="" alt="Affiche">
-                    </div>
+            <select name="genre" id="filter-genre" class="select-button">
+                <option value="" selected>Genre<i class="fa-solid fa-chevron-down"></i></option>
+                <option value="35">Comédie</option>
+                <option value="10759">Action & Aventure</option>
+                <option value="10765">Science-Fiction & Fantastique</option>
+                <option value="18">Drame</option>
+            </select>
 
-                    <div class="carousel-slide card">
-                        <img class="poster-comic" src="" alt="Affiche">
-                    </div>
+            <select name="annees" id="filter-annees" class="select-button">
+                <option value="" selected>Années<i class="fa-solid fa-chevron-down"></i></option>
+                <option value="1970-01-01,1979-12-31">70's</option>
+                <option value="1980-01-01,1989-12-31">80's</option>
+                <option value="1990-01-01,1999-12-31">90's</option>
+                <option value="2000-01-01,2009-12-31">00's</option>
+            </select>
+        </div>
 
-                    <div class="carousel-slide card">
-                        <img class="poster-comic" src="" alt="Affiche">
-                    </div>
+        <div id="series"></div>
 
-                    <div class="carousel-slide card">
-                        <img class="poster-comic" src="" alt="Affiche">
-                    </div>
-
-                    <div class="carousel-slide card">
-                        <img class="poster-comic" src="" alt="Affiche">
-                    </div>
-
-                    <div class="carousel-slide card">
-                        <img class="poster-comic" src="" alt="Affiche">
-                    </div>
-
-                    <div class="carousel-slide card">
-                        <img class="poster-comic" src="" alt="Affiche">
-                    </div>
-
-                    <div class="carousel-slide card">
-                        <img id="poster-comic-" src="" alt="Affiche">
-                    </div>
-
-                    <div class="carousel-slide card">
-                        <img class="poster-comic" src="" alt="Affiche">
-                    </div>
-                </div>
-                <button class="carousel-control next">&#8250;</button>
-            </div>
-
-            <hr>
-        </section>
-
-        <section class="action">
-            <h2 data-genre="10759">Action & Aventure</h2>
-            <div class="carousel" id="carousel6">
-                <button class="carousel-control prev">&#8249;</button>
-                <div class="carousel-container">
-                    <div class="carousel-slide card">
-                        <img id="poster-80-1" src="" alt="Affiche">
-                    </div>
-
-                    <div class="carousel-slide card">
-                        <img id="poster-80-2" src="" alt="Affiche">
-                    </div>
-
-                    <div class="carousel-slide card">
-                        <img id="poster-80-3" src="" alt="Affiche">
-                    </div>
-
-                    <div class="carousel-slide card">
-                        <img id="poster-80-4" src="" alt="Affiche">
-                    </div>
-
-                    <div class="carousel-slide card">
-                        <img id="poster-80-5" src="" alt="Affiche">
-                    </div>
-
-                    <div class="carousel-slide card">
-                        <img id="poster-80-6" src="" alt="Affiche">
-                    </div>
-
-                    <div class="carousel-slide card">
-                        <img id="poster-80-7" src="" alt="Affiche">
-                    </div>
-
-                    <div class="carousel-slide card">
-                        <img id="poster-80-8" src="" alt="Affiche">
-                    </div>
-
-                    <div class="carousel-slide card">
-                        <img id="poster-80-9" src="" alt="Affiche">
-                    </div>
-
-                    <div class="carousel-slide card">
-                        <img id="poster-80-10" src="" alt="Affiche">
-                    </div>
-                </div>
-                <button class="carousel-control next">&#8250;</button>
-            </div>
-
-            <hr>
-        </section>
-
-        <section class="sci-fi">
-            <h2 data-genre="10765">Science-Fiction & Fantastique</h2>
-            <div class="carousel" id="carousel7">
-                <button class="carousel-control prev">&#8249;</button>
-                <div class="carousel-container">
-                    <div class="carousel-slide card">
-                        <img id="poster-90-1" src="" alt="Affiche">
-                    </div>
-
-                    <div class="carousel-slide card">
-                        <img id="poster-90-2" src="" alt="Affiche">
-                    </div>
-
-                    <div class="carousel-slide card">
-                        <img id="poster-90-3" src="" alt="Affiche">
-                    </div>
-
-                    <div class="carousel-slide card">
-                        <img id="poster-90-4" src="" alt="Affiche">
-                    </div>
-
-                    <div class="carousel-slide card">
-                        <img id="poster-90-5" src="" alt="Affiche">
-                    </div>
-
-                    <div class="carousel-slide card">
-                        <img id="poster-90-6" src="" alt="Affiche">
-                    </div>
-
-                    <div class="carousel-slide card">
-                        <img id="poster-90-7" src="" alt="Affiche">
-                    </div>
-
-                    <div class="carousel-slide card">
-                        <img id="poster-90-8" src="" alt="Affiche">
-                    </div>
-
-                    <div class="carousel-slide card">
-                        <img id="poster-90-9" src="" alt="Affiche">
-                    </div>
-
-                    <div class="carousel-slide card">
-                        <img id="poster-90-10" src="" alt="Affiche">
-                    </div>
-                </div>
-                <button class="carousel-control next">&#8250;</button>
-            </div>
-
-            <hr>
-        </section>
-
-        <section class="drame">
-            <h2>Drame</h2>
-            <div class="carousel" id="carousel8">
-                <button class="carousel-control prev">&#8249;</button>
-                <div class="carousel-container">
-                    <div class="carousel-slide card">
-                        <img id="poster-2000-1" src="" alt="Affiche">
-                    </div>
-
-                    <div class="carousel-slide card">
-                        <img id="poster-2000-2" src="" alt="Affiche">
-                    </div>
-
-                    <div class="carousel-slide card">
-                        <img id="poster-2000-3" src="" alt="Affiche">
-                    </div>
-
-                    <div class="carousel-slide card">
-                        <img id="poster-2000-4" src="" alt="Affiche">
-                    </div>
-
-                    <div class="carousel-slide card">
-                        <img id="poster-2000-5" src="" alt="Affiche">
-                    </div>
-
-                    <div class="carousel-slide card">
-                        <img id="poster-2000-6" src="" alt="Affiche">
-                    </div>
-
-                    <div class="carousel-slide card">
-                        <img id="poster-2000-7" src="" alt="Affiche">
-                    </div>
-
-                    <div class="carousel-slide card">
-                        <img id="poster-2000-8" src="" alt="Affiche">
-                    </div>
-
-                    <div class="carousel-slide card">
-                        <img id="poster-2000-9" src="" alt="Affiche">
-                    </div>
-
-                    <div class="carousel-slide card">
-                        <img id="poster-2000-10" src="" alt="Affiche">
-                    </div>
-                </div>
-                <button class="carousel-control next">&#8250;</button>
-            </div>
-        </section>
-
+        <div id="pagination">
+            <button id="prev-page" disabled><i class="fa-solid fa-arrow-left"></i></button>
+            <span id="current-page">Page 1</span>
+            <button id="next-page"><i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+        
     </main>
 
     <footer>

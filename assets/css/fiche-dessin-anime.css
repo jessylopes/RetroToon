@@ -426,10 +426,7 @@ div #left-controls {
     border-radius: 4px;
     padding: 0.5rem 1.5rem;
     appearance: none;
-    background-image: url('/assets/images-fiche-dessin-anime/chevron-down.png');
-    background-repeat: no-repeat;
-    background-size: 12px;
-    background-position: right 15px center;
+    background: url('/assets/images-fiche-dessin-anime/chevron-down.png') no-repeat calc(100% - 15px) center / 12px 12px;
     width: 140px;
     margin-bottom: 25px;
     cursor: pointer;
