@@ -206,9 +206,9 @@ body {
     align-items: center; /* Centre horizontalement */
     margin-bottom: 20px;
     background: linear-gradient(to top, #001429, transparent);
-    border: 1px red solid;
     height: 150px;
     margin-top: 100px;
+    margin-bottom: 50px;
 }
 .containertitrepage h2 a {
     color: #EB7A57;
@@ -218,7 +218,7 @@ body {
 h1 {
     font-family: 'Bangers', cursive;
     color: #FFFAFA;
-    font-size:30px;
+    font-size:40px;
     margin-bottom: 10px;
     letter-spacing: 2px;
 }
@@ -249,7 +249,6 @@ h1 {
     flex-direction: column; /* Pour que H1 et H2 s'affichent l'un sous l'autre */
     justify-content: center; /* Centre le contenu verticalement */
     align-items: center;
-    border: 1px red solid; 
 }
 
 /****************************container formulaire*****************/
@@ -275,9 +274,7 @@ h1 {
 .container-formulaire input.inputserie{
     width: 30px;
 }
-.inputLabel{
-        border: 1px red solid; 
-}
+
 
 /************************input*************************/
 /************************astérisques*********************/
@@ -298,7 +295,6 @@ h1 {
 /************************astérisques*********************/
 /************************checkbox*************************/
 .checkbox-container{
-    border: 1px red solid;
     display: flex; /* Utilise Flexbox pour l'affichage */
     align-items: center; /* Centre les éléments verticalement */
     
@@ -340,6 +336,7 @@ button {
     padding: 10px 10px 10px 10px;
     border-radius: 1%;
     transition: border-color, color 0.3s;
+    margin-bottom: 30px;
 }
 
 button:hover{
@@ -412,6 +409,9 @@ footer p {
     color: #FFFAE0;
     margin-top: 20px;
     font-family: Fredoka;
+}
+footer a{
+    text-decoration: none;
 }
 /*********************** footer *******************/
 /*********************** media queries*******************/

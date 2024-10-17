@@ -19,16 +19,17 @@
         <nav id="menu">
             <!-- Logo à gauche -->
             <div class="logo">
-                <a href="index.html">
+                <a href="index-client.html">
                     <img src="/assets/images/Design_sans_titre-removebg-preview 4.png" alt="Logo">
                 </a>
             </div>
 
             <!-- Liens de navigation au centre -->
             <ul class="nav-links">
-                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index-client.html">Accueil</a></li>
                 <li><a href="series.html">Séries</a></li>
                 <li><a href="films.html">Films</a></li>
+                <li><a href="#"><i class="fi fi-tr-teddy-bear"></i>Enfants</a></li>
             </ul>
 
             <!-- Icônes à droite -->
@@ -37,36 +38,34 @@
                     <input id="search-box" type="text" class="search-box" name="q" />
                     <label for="search-box"><span class="search-icon"><i class="fi fi-rr-search"></i></span></label>
                 </form>
-                <a href="#" class="icon" style="text-decoration: none;"><i class="fi fi-rr-globe"></i></a>
+                <a href="#" class="icon" style="text-decoration: none;"><i class="fi fi-rr-heart"></i></a>
                 <div class="account">
                     <a href="#" class="icon dropdown-arrow" id="accountToggle">
                         <i class="fa-solid fa-user"></i>
                     </a>
 
                     <ul class="sub-menus" id="accountSubMenu">
-                        <li onclick="modeEnfant()"><a href='#'><i class="fi fi-rr-child-head"></i>Mode enfant</a></li>
+                        <li onclick="modeEnfant()"><a href='/html/profil.html'><i class="fa-solid fa-user-pen text-dark-emphasis"></i>Gestion profil</a></li>
                         <hr>
-                        <li><a href='parametre.html'><i class="fi fi-rr-settings"></i>Paramètres</a></li>
+                        <li><a href='/parametre.html'><i class="fi fi-rr-settings"></i>Paramètres</a></li>
                         <hr>
-                        <li><a href='parametre.html#content2'><i class="fi fi-rr-heart"></i>Favoris</a></li>
-                        <hr>
-                        <li><a href='#'><i class="fi fi-rr-exit"></i>Déconnexion</a></li>
+                        <li><a href='/html/index.html'><i class="fi fi-rr-exit"></i>Déconnexion</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-
     <div class="tab-bar">
-        <a href="index.html"><i class="fa-solid fa-house"></i></a>
-        <a href="films.html"><i class="fi fi-rr-clapperboard-play"></i></a>
-        <a href="series.html"><i class="fi fi-rr-tv-retro"></i></a>
-        <a href="annees.html"><i class="fi fi-rr-90s-music-disc"></i></i></a>
-        <a href="parametre.html#content2"><i class="fi fi-rr-heart"></i></a>
+        <a href="index-client.html"><i class="fa-solid fa-house"></i></a>
+        <a href="#"><i class="fi fi-rr-clapperboard-play"></i></a>
+        <a href="#"><i class="fi fi-rr-tv-retro"></i></a>
+        <a href="years.html"><i class="fi fi-rr-90s-music-disc"></i></i></a>
+        <a href="#"><i class="fi fi-rr-heart"></i></a>
         <a href="#" class="icon dropdown-arrow" id="accountToggle">
             <i class="fa-solid fa-user"></i>
         </a>
     </div>
+
 
     <main>
         <div class="entete">
@@ -106,14 +105,13 @@
     </main>
 
     <footer>
-        <img src="/assets/images/Design_sans_titre-removebg-preview 4.png" alt="logo">
+        <img src="/assets/imgParametre/Design_sans_titre-removebg-preview 2.png" alt="logo">
         <div id="liste-footer">
-            <p>Accueil</p>
-            <p>Nous contacter</p>
-            <p>Assistance</p>
-            <p>Applications</p>
-            <p>Conditions générales d'utilisation</p>
-            <p>Politique de confidentialité</p>
+            <a href="/html/index-client.html"><p>Accueil</p></a>
+            <a href="/html/contact.html"><p>Nous contacter</p></a>
+            <a href="/html/index.html#dispo"><p>Applications</p></a>
+            <a href="#"><p>Conditions générales d'utilisation</p></a>
+            <a href="#"><p>Politique de confidentialité</p></a>
         </div>
         <nav>
             <a href=""><i class="fa-brands fa-twitter"></i></a>
