@@ -114,7 +114,8 @@
                                 <span id="mute-btn"><i class="fa-solid fa-volume-high"></i></span>
 
                                 <div>
-                                    <input type="range" name="volume-slider" id="volume-slider" min="0" max="100" value="50">
+                                    <input type="range" name="volume-slider" id="volume-slider" min="0" max="100"
+                                        value="50">
                                     <!-- <progress min="0" max="100" value="50"></progress> -->
                                 </div>
                                 <span id="full-screen"><i class="fa-solid fa-expand"></i></span>
@@ -160,7 +161,14 @@
                 </div>
 
                 <h2>Description</h2>
-                <p>Cette série raconte les aventures de trois amies adolescentes : Alex, Clover et Sam. Étudiantes dans
+                <p><span id="loading"></span></p>
+                <p><span id="synopsis"></span></p>
+                <p>Genres : <span id="genres"></span></p>
+                <p>Saisons : <span id="seasons"></span></p>
+                <p>Durée : <span id="runtime"></span></p>
+                <p>Année : <span id="year"></span></p>
+
+                <!-- <p>Cette série raconte les aventures de trois amies adolescentes : Alex, Clover et Sam. Étudiantes dans
                     la
                     vie de tous les jours, elles sont en réalité agents secrets ; c'est-à-dire des espionnes
                     professionnelles qui travaillent pour le WOOHP, une organisation secrète de protection de
@@ -168,8 +176,8 @@
                     Lorsque leur patron Jerry a besoin de leurs services, il les envoie en mission, après leur avoir
                     fait
                     revêtir des combinaisons intégrales moulantes en latex coloré (jaune pour Alex, rouge pour Clover et
-                    verte pour Sam) et fourni des gadgets, qui les aideront à mener à bien leurs enquêtes.</p>
-                <p>Animation, Comédie, Kids, Action & Adventure, Drame<br>2001<br>7 saisons<br>20m</p>
+                    verte pour Sam) et fourni des gadgets, qui les aideront à mener à bien leurs enquêtes.</p> -->
+                <!-- <p>Animation, Comédie, Kids, Action & Adventure, Drame<br>2001<br>7 saisons<br>20m</p> -->
             </section>
 
             <section id="commentaires">
@@ -208,6 +216,13 @@
             </section>
             <section id="nos-suggestions">
                 <h2>Nos suggestions</h2>
+                <div class="container">
+                    <div class="arrow-left-series"><i class="fi fi-bs-angle-left"></i></div>
+                    <div class="carousel-container" id="series-container">
+                        <!-- Les séries seront injectées ici par JavaScript -->
+                    </div>
+                    <div class="arrow-right-series"><i class="fi fi-bs-angle-right"></i></div>
+                </div>
             </section>
         </div>
     </main>
@@ -231,21 +246,8 @@
     </footer>
 
     <!-- <script src="https://kit.fontawesome.com/e5a9a83adf.js" crossorigin="anonymous"></script> -->
-    <script src="/assets/script/fiche-dessin-anime.js">
-        const volumeSlider = document.getElementById('volumeSlider');
-
-        /* Fonction pour mettre à jour la couleur de la piste */
-        volumeSlider.addEventListener('input', function () {
-            const value = this.value;
-            const max = this.max;
-
-            /* Calculer le pourcentage de la valeur actuelle */
-            const percentage = (value / max) * 100;
-
-            /* Mettre à jour la couleur de la piste en utilisant un dégradé linéaire */
-            this.style.background = `linear-gradient(to right, #4CAF50 ${percentage}%, #ccc ${percentage}%)`;
-        });
-    </script>
+    <script src="/assets/script/fiche-dessin-anime.js"></script>
+    <script src="/assets/script/index-client.js"></script>
 </body>
 
 </html>
