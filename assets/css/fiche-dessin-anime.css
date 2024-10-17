@@ -56,7 +56,7 @@ section {
     align-items: center;
     padding-block: 10px;
     padding-inline: 20px 0px;
-    background: linear-gradient( #001429, transparent);
+    background: linear-gradient(#001429, transparent);
     height: 80px;
     position: fixed;
     top: 0;
@@ -73,10 +73,11 @@ section {
 /* Centrage des liens de navigation */
 .nav-links {
     display: flex;
-    justify-content:flex-start;
-  flex-grow: 1;
+    justify-content: flex-start;
+    flex-grow: 1;
 }
-.nav-links i{
+
+.nav-links i {
     padding-right: 3px;
 }
 
@@ -116,12 +117,12 @@ section {
 .nav-icons .icon i {
     font-size: 1.5em;
     color: #FFFAE0;
-    text-decoration: none; 
+    text-decoration: none;
     transition: color 0.3s;
 }
 
 .icon i:hover,
-.search-icon i:hover{
+.search-icon i:hover {
     color: #EB7A57;
     text-decoration: none;
 }
@@ -185,24 +186,32 @@ section {
 
 .sub-menus {
     position: absolute;
-    top: 144%; /* Positionner le sous-menu directement sous le parent */
-    right: 0;  /* Aligner le sous-menu avec le bord droit de l'icône */
-    width: 200px; /* Largeur du sous-menu */
+    top: 144%;
+    /* Positionner le sous-menu directement sous le parent */
+    right: 0;
+    /* Aligner le sous-menu avec le bord droit de l'icône */
+    width: 200px;
+    /* Largeur du sous-menu */
     background: #001429;
     z-index: 99;
-    display: none; /* Masqué par défaut */
+    display: none;
+    /* Masqué par défaut */
     transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
     opacity: 0;
     visibility: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.594);
 }
-.sub-menus hr{
+
+.sub-menus hr {
     border: solid 1px #FFFAE0;
     margin-inline: 10%;
 }
+
 .sub-menus.active {
-    display: block; /* Affiche le sous-menu */
-    opacity: 1; /* Assure une transition en douceur */
+    display: block;
+    /* Affiche le sous-menu */
+    opacity: 1;
+    /* Assure une transition en douceur */
     visibility: visible;
 }
 
@@ -225,7 +234,8 @@ section {
 }
 
 .sub-menus i {
-    padding-right: 10px; /* Espacement entre l'image et le texte */
+    padding-right: 10px;
+    /* Espacement entre l'image et le texte */
     font-size: 1.5rem;
 }
 
@@ -572,12 +582,14 @@ select:focus {
 } */
 
 /************ COMMENTAIRES ************/
-#commentaires{
+#commentaires {
     width: 90%;
 }
-#description{
+
+#description {
     width: 90%;
 }
+
 #commentaires h2 {
     font-family: "Bangers", system-ui;
     font-weight: 400;
@@ -722,7 +734,7 @@ button[type="submit"]:focus {
     letter-spacing: 2px;
 }
 
-/* CODE DE LOUISIANNE */
+/* CODE DE LOUISIANE */
 #historique-container,
 #series-container {
     display: flex;
@@ -1013,9 +1025,11 @@ footer p {
     margin-top: 20px;
     font-family: Fredoka;
 }
-footer a{
+
+footer a {
     text-decoration: none;
 }
+
 /************ RESPONSIVE ************/
 @media (max-width: 767px) {
 
