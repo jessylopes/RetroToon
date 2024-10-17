@@ -4,13 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RetroToon-Years-70</title>
+    <title>RetroToon-Années</title>
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/Design_sans_titre-removebg-preview 4.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@flaticon/flaticon-uicons/css/all/all.css">
-    <link rel="stylesheet" href="/assets/css/annees.css">
+    <link rel="stylesheet" href="/assets/css/resultas-barre-de-recherche.css">
+
 </head>
 
 <body>
@@ -25,16 +26,16 @@
 
             <!-- Liens de navigation au centre -->
             <ul class="nav-links">
-                <li><a href="/html/index.html">Accueil</a></li>
-                <li><a href="/html/series.html">Séries</a></li>
-                <li><a href="/html/films.html">Films</a></li>
-                <li><a href="/html/years.html">Année</a></li>
-                <li><a href="/parametre.html#content2">Favoris</a></li>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="series.html">Séries</a></li>
+                <li><a href="films.html">Films</a></li>
+                <li><a href="annees.html">Années</a></li>
+                <li><a href="parametre.html#content2">Favoris</a></li>
             </ul>
 
             <!-- Icônes à droite -->
             <div class="nav-icons">
-                <form class="search-container" action="search">
+                <form class="search-container" action="resultas-barre-de-recherche.html" id="searchForm">
                     <input id="search-box" type="text" class="search-box" name="q" />
                     <label for="search-box"><span class="search-icon"><i class="fi fi-rr-search"></i></span></label>
                 </form>
@@ -47,9 +48,9 @@
                     <ul class="sub-menus" id="accountSubMenu">
                         <li onclick="modeEnfant()"><a href='#'><i class="fi fi-rr-child-head"></i>Mode enfant</a></li>
                         <hr>
-                        <li><a href='/parametre.html'><i class="fi fi-rr-settings"></i>Paramètres</a></li>
+                        <li><a href='parametre.html'><i class="fi fi-rr-settings"></i>Paramètres</a></li>
                         <hr>
-                        <li><a href='/parametre.html#content2'><i class="fi fi-rr-heart"></i>Favoris</a></li>
+                        <li><a href='parametre.html#content2'><i class="fi fi-rr-heart"></i>Favoris</a></li>
                         <hr>
                         <li><a href='#'><i class="fi fi-rr-exit"></i>Déconnexion</a></li>
                     </ul>
@@ -58,23 +59,46 @@
         </nav>
     </header>
 
+    <div class="tab-bar">
+        <a href="index.html"><i class="fa-solid fa-house"></i></a>
+        <a href="films.html"><i class="fi fi-rr-clapperboard-play"></i></a>
+        <a href="series.html"><i class="fi fi-rr-tv-retro"></i></a>
+        <a href="annees.html"><i class="fi fi-rr-90s-music-disc"></i></i></a>
+        <a href="parametre.html#content2"><i class="fi fi-rr-heart"></i></a>
+        <a href="#" class="icon dropdown-arrow" id="accountToggle">
+            <i class="fa-solid fa-user"></i>
+        </a>
+    </div>
+
     <main>
-        <!-- Les cartes seront ajoutées ici par JavaScript -->
-        <div class="grid-container">
+
+
+        <div class="entete">
+            <h1>
+                Recherche sur le site
+            </h1>
+
+            <h3>
+                Un voyage à travers les années, une époque à la fois
+            </h3>
         </div>
 
-        <!-- Div pour afficher les détails de l'émission -->
-        <div id="showDetails" class="details-container">
-            <span class="close-details">&times;</span>
-            <img id="details-img" src="" alt="Image">
-            <div class="details-info">
-                <h2 id="details-title"></h2>
-                <p id="details-description"></p>
-                <p id="details-year"></p>
-                <p id="details-genre"></p>
-            </div>
+        <div class="large-search-container">
+            <input type="text" class="large-search-box" id="large-search-box" placeholder="Rechercher un film ou une série...">
+            <button type="submit" id="large-search-button">Rechercher</button>
+    
         </div>
+    
+        <div class="filter-buttons">
+            <button id="filter-all">Tout</button>
+            <button id="filter-animation">Dessins Animés</button>
+            <button id="filter-movies">Films</button>
         </div>
+    
+        
+    
+        <div id="results"></div>
+
 
     </main>
 

@@ -38,7 +38,7 @@
         <a href="index.html"><i class="fa-solid fa-house"></i></a>
         <a href="films.html"><i class="fi fi-rr-clapperboard-play"></i></a>
         <a href="series.html"><i class="fi fi-rr-tv-retro"></i></a>
-        <a href="years.html"><i class="fi fi-rr-90s-music-disc"></i></i></a>
+        <a href="annees.html"><i class="fi fi-rr-90s-music-disc"></i></i></a>
         <a href="parametre.html#content2"><i class="fi fi-rr-heart"></i></a>
         <a href="#" class="icon dropdown-arrow" id="accountToggle">
             <i class="fa-solid fa-user"></i>
@@ -132,6 +132,37 @@
         <P>Tous droits réservés © Retrotoon Group 2024</P>
     </footer>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('searchForm');
+            const input = document.getElementById('search-box');
+        
+            function redirectToResultsPage(query) {
+                const url = new URL('results.html', window.location.href);
+                url.searchParams.set('query', query);
+                window.location.href = url;
+            }
+        
+            form.addEventListener('submit', event => {
+    event.preventDefault(); // Empêche le rechargement de la page par défaut
+    const searchQuery = input.value.trim();
+    if (searchQuery) {
+        // Redirige vers la page des résultats en ajoutant la requête de recherche à l'URL
+        window.location.href = `resultas-barre-de-recherche.html?query=${encodeURIComponent(searchQuery)}`;
+    }
+});
+
+        
+            input.addEventListener('keyup', event => {
+                if (event.key === 'Enter') {
+                    const searchQuery = input.value.trim();
+                    if (searchQuery) {
+                        redirectToResultsPage(searchQuery);
+                    }
+                }
+            });
+        });
+        </script>
     <script src="/assets/script/script.js"></script>
 </body>
 

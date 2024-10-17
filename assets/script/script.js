@@ -17,25 +17,6 @@
     });
 });
 
-// *************************barre de recherche
-document.addEventListener('DOMContentLoaded', () => {
-    const searchIcon = document.querySelector('.search-icon');
-    const searchBox = document.getElementById('search-box');
-
-    searchIcon.addEventListener('click', () => {
-        searchBox.classList.toggle('active'); // Ajoute ou supprime la classe active
-        searchBox.focus(); // Focalise la barre de recherche pour permettre la saisie de texte
-    });
-
-    searchBox.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter') {
-            event.preventDefault();
-            // Ajoute ici la logique pour envoyer la recherche, par exemple en soumettant un formulaire
-            console.log('Recherche soumise :', searchBox.value);
-        }
-    });
-});
-
 // ****************************carrousel
 document.addEventListener('DOMContentLoaded', function() {
     function initializeCarousel(carouselId) {
@@ -119,12 +100,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // ********************* Années 80 *****************
 // Fonction pour récupérer et afficher les séries TV animées des années 80
-function fetchAndDisplayTVShows1980s() {
-    // URL de l'API pour découvrir les séries TV avec les paramètres spécifiés :
+/**
+ *     // URL de l'API pour découvrir les séries TV avec les paramètres spécifiés :
     // - Genre : 16 (Animation)
     // - Date de première diffusion : entre le 1er janvier 1980 et le 31 décembre 1989
     // - Langue : français (fr-FR)
     // - Triées par popularité décroissante
+ * @param {hggghgh} fetchAndDisplayTVShows1980s
+ */
+function fetchAndDisplayTVShows1980s() {
+
     const urlTV = `https://api.themoviedb.org/3/discover/tv?api_key=${API_KEY}&with_genres=16&first_air_date.gte=1980-01-01&first_air_date.lte=1989-12-31&language=fr-FR&sort_by=popularity.desc`;
 
     // Appel à l'API pour récupérer les données des séries TV
@@ -166,7 +151,7 @@ function fetchAndDisplayTVShows1990s() {
 }
 
 // Appel de la fonction pour charger les séries animées des années 90
-fetchAndDisplayTVShows1990s();*/
+fetchAndDisplayTVShows1990s();
 
 //**********************************00's********************** */
 /*function fetchAndDisplayTVShows2000s() {
