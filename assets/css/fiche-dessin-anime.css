@@ -2,6 +2,18 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Bangers&family=Fredoka:wght@300..700&display=swap');
 
+/* @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css); */
+
+fieldset,
+label {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 20px;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -12,7 +24,7 @@
     --dark-blue: #001D3D;
     --beige: #FFFAE0;
     --corail: #EB7A57;
-    --font-size-paragraph: 1rem;
+    --font-size-paragraph: 1.2rem;
     --font-size-title: 2rem;
 }
 
@@ -25,7 +37,6 @@ body {
 section {
     margin-right: auto;
     margin-left: auto;
-    padding: 2rem;
 }
 
 #main-content {
@@ -84,7 +95,7 @@ section {
 }
 
 .nav-links a:hover {
-    color: #E28B70;
+    color: #EB7A57;
 }
 
 /* Alignement des icônes à droite */
@@ -229,48 +240,82 @@ footer i:hover {
 }
 
 /************ VIDEO PLAYER BOX ************/
+/* Police de l'écriture de la vidéo */
 #principal-video h1 {
     font-family: "Bangers", system-ui;
     font-weight: 400;
     font-style: normal;
     color: var(--beige);
     font-size: 4rem;
-    margin-top: 60px;
-    text-align: center;
+    margin: 15px 0px 0px 15px;
+    letter-spacing: 2px;
 }
 
-#video-player-box {
+/*Placement du h1 sur la vidéo*/
+#title-video-container {
+    position: absolute;
+    top: 0px;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    /* opacité à 0 pour cacher au départ */
+    /* opacity: 0;
+    transition: opacity 1s ease; */
+}
+
+/* cadre qui contient les controls et le titre de la vidéo */
+#frame-video-title-controls {
+    position: absolute;
+    /* ici le frame est par dessus une autre div qui est en position relative,
+    du coup avec je lui fait prendre toute la hauteur de sa div parent (video-container) */
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+/*VIDEO CONTAINER*/
+#principal-video {
+    padding: 2rem;
+    /* border: 1px solid green; */
+}
+
+#video-container {
     position: relative;
+    width: 100%;
+    height: calc(100vh - 150px);
+    /* overflow: hidden; */
     margin-top: 50px;
-
+    /* border: 1px solid yellow; */
 }
 
-video::-webkit-media-controls {
-    display: none !important;
-}
-
-video::-webkit-media-controls-enclosure {
-    display: none !important;
-}
-
-video {
+#video-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
     pointer-events: none;
     position: relative;
+    background-color: #000;
 }
 
 #video-controls-container {
     height: 100px;
-    background: linear-gradient(to top, #001D3D, transparent);
-    opacity: 0;
+    background: linear-gradient(to top, #000, transparent);
     position: absolute;
-    bottom: 0px;
+    bottom: -1px;
     width: 100%;
 
-    transition: opacity 1s ease;
+    /* opacity: 0;
+    transition: opacity 1s ease; */
 }
 
-
-#video-player-box:fullscreen {
+#video-container:fullscreen {
     width: 100vw;
     /* La vidéo occupe toute la largeur de l'écran */
     height: 100vh;
@@ -288,49 +333,80 @@ video {
     /* Assurez-vous que les contrôles sont toujours au-dessus */
 }
 
-
 /* TOP CONTROLS */
 #top-controls {
     display: flex;
-    flex-direction: row;
-    gap: 10px;
+    position: relative;
+    bottom: -25px;
 }
 
-#time-progression-container {
-    font-size: 20px;
-    color: #fff;
-    font-family: 'Fredoka';
-    margin-top: 10px;
+/* PROGRESS BAR AND THUMB SLIDER*/
+#container-progress-bar {
+    width: 85%;
+    height: 10px;
+    background-color: #d3d3d3;
+    /*couleur de la barre non remplie */
+    border-radius: 5px;
+    position: relative;
+    cursor: pointer;
+    margin-left: 15px;
 }
 
 #progress-bar {
-    -webkit-appearance: none;
-    /* width: 100%; */
-    height: 15px;
+    width: 0%;
+    height: 100%;
+    background-color: var(--beige);
     border-radius: 5px;
-    background: #d3d3d3;
-    outline: none;
-    display: block;
-    width: 1250px;
-    margin: 15px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: width 0.1s ease;
+    z-index: 1;
+    /* la barre de progression est en dessous */
 }
 
-#progress-bar::-webkit-slider-thumb {
+#thumb-slider {
+    width: 100%;
+    position: absolute;
+    top: -5px;
+    left: 0;
+    background: transparent;
+    z-index: 2;
+    /* le thumb slider est au-dessus */
     -webkit-appearance: none;
-    appearance: none;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    background: var(--beige);
-    cursor: pointer;
+    /* supprime les styles par défaut */
+    pointer-events: none;
+    /* permet de desactiver l'interaction directe avec le slider */
 }
 
-#progress-bar::-moz-range-thumb {
-    width: 25px;
-    height: 25px;
+/* apparence du thumb slider */
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background-color: var(--beige);
     border-radius: 50%;
-    background: var(--beige);
-    cursor: pointer;
+    pointer-events: auto;
+    /* activer l'interaction pour le thumb */
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background-color: var(--beige);
+    border-radius: 50%;
+    pointer-events: auto;
+    /* activer l'interaction pour le thumb */
+}
+
+#time-progression-container {
+    font-size: var(--font-size-paragraph);
+    color: #fff;
+    font-family: 'Fredoka';
+    position: absolute;
+    top: -6px;
+    right: 0px;
+    margin-right: 15px;
 }
 
 /* ICONES DU PLAYER : #btn-en-arriere, #btn-en-avant, .fa-pause,
@@ -338,6 +414,7 @@ video {
 .fa-pause,
 .fa-play,
 .fa-volume-xmark,
+.fa-volume-low,
 .fa-volume-high,
 .fa-expand,
 .fa-compress {
@@ -359,11 +436,9 @@ video {
 /* BOTTOM CONTROLS */
 #bottom-controls {
     display: flex;
-    flex-direction: row;
-    align-items: first baseline;
     margin: 0px 20px;
-    gap: 25px;
     position: relative;
+    bottom: -35px;
 }
 
 /* BOTTOM LEFT CONTROLS */
@@ -372,51 +447,50 @@ div #left-controls {
     gap: 25px;
 }
 
-
-
 /* BOTTOM RIGHT CONTROLS */
 #right-controls {
     display: flex;
+    gap: 25px;
     position: absolute;
-    right: 10px
-}
-
-#mute-btn {
-    margin-right: 10px;
+    right: 10px;
+    align-items: center;
 }
 
 #volume-slider {
-    -webkit-appearance: none;
-    height: 15px;
-    border-radius: 5px;
-    background: #d3d3d3;
-    outline: none;
-    display: block;
+    height: 10px;
     width: 100px;
-    margin: 15px;
+    background-color: #d3d3d3;
+    accent-color: var(--beige);
+    z-index: 2;
+    -webkit-appearance: none;
+    pointer-events: none;
+    border-radius: 5px;
 }
 
-#volume-slider::-webkit-slider-thumb {
+/* #volume-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    pointer-events: auto;
+} */
+
+/* #volume-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     background: var(--beige);
     cursor: pointer;
+} */
+
+/* Dans cette section on cache les controls founis par safari ou chrome */
+video::-webkit-media-controls {
+    display: none !important;
 }
 
-#volume-slider::-moz-range-thumb {
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    background: var(--beige);
-    cursor: pointer;
-}
-
-
-#full-screen {
-    margin-left: 25px;
+video::-webkit-media-controls-enclosure {
+    display: none !important;
 }
 
 /************ DESCRIPTION ************/
@@ -428,6 +502,7 @@ div #left-controls {
     color: var(--beige);
     font-size: var(--font-size-title);
     margin: 25px 0px;
+    letter-spacing: 2px;
 }
 
 #description p {
@@ -440,8 +515,14 @@ div #left-controls {
     line-height: 1.5rem;
 }
 
-#select-box-saisons,
-#select-box-episodes {
+#container-select-boxes-and-favorite-likes {
+    display: flex;
+    justify-content: space-between;
+    /* border: 1px solid red; */
+}
+
+
+select {
     font-family: "Fredoka", sans-serif;
     font-weight: 500;
     font-size: var(--font-size-paragraph);
@@ -450,14 +531,21 @@ div #left-controls {
     border: 2px solid var(--beige);
     border-radius: 4px;
     padding: 0.5rem 1.5rem;
+    /* ici j'ai enlevé l'apparence de base du chevron du coup 
+    j'ai ajouté une image pour avoir un chevron qui me convenait */
     appearance: none;
     background-image: url('/assets/images-fiche-dessin-anime/chevron-beige.png');
     background-repeat: no-repeat;
     background-size: 20px;
-    background-position: right 15px center;
+    background-position: right 5px center;
     width: 140px;
-    /* margin-bottom: 25px; */
     cursor: pointer;
+}
+
+select:hover,
+select:focus {
+    border-color: var(--corail);
+    outline: none;
 }
 
 .select-container-row {
@@ -465,12 +553,33 @@ div #left-controls {
     flex-direction: row;
     gap: 20px;
     width: fit-content;
+    */
     /*ajustement au niveau du contenu au lieu du conteneur*/
 }
 
-select:focus {
-    outline: 2px solid var(--beige);
+/* FAVORIS AND LIKE */
+#container-favoris-and-like {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
 }
+
+#container-favoris-and-like>button {
+    background: none;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 30px;
+    color: var(--beige);
+}
+
+/* .fa-heart,
+.fa-thumbs-up {
+    font-size: 30px;
+    color: var(--beige);
+    margin-top: 10px;
+    cursor: pointer;
+} */
 
 /************ COMMENTAIRES ************/
 
@@ -481,6 +590,7 @@ select:focus {
     color: var(--beige);
     font-size: var(--font-size-title);
     margin: 25px 0px;
+    letter-spacing: 2px;
 }
 
 #commentaires p {
@@ -499,16 +609,23 @@ select:focus {
 
 }
 
-
-#voir-plus-commentaires {
+.fa-chevron-down {
+    font-size: var(--font-size-paragraph);
     color: var(--beige);
-    text-align: center;
-    margin-top: 30px;
     cursor: pointer;
 }
 
-.show-more-comment {}
+#container-show-more-comments {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--beige);
+    margin-top: 30px;
+}
 
+#show-more-comment {
+    cursor: pointer;
+}
 
 #commentaires .user-comment-row {
     margin: 30px 0px 10px 0px;
@@ -521,23 +638,6 @@ select:focus {
     align-items: center;
 }
 
-.star-rating-container {
-    height: 30px;
-    width: 150px;
-    /* background-color: var(--corail); */
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 0px 5px;
-}
-
-.fa-star,
-.fa-star-half-stroke {
-    font-size: 1rem;
-    color: var(--beige);
-}
-
-
 /************ VOTRE AVIS ************/
 #votre-avis h2 {
     font-family: "Bangers", system-ui;
@@ -546,6 +646,7 @@ select:focus {
     color: var(--beige);
     font-size: var(--font-size-title);
     margin: 25px 0px;
+    letter-spacing: 2px;
 }
 
 #votre-avis p {
@@ -581,7 +682,6 @@ textarea {
 
 textarea:hover {
     cursor: pointer;
-    /* background-color: #001429; */
 }
 
 textarea:focus {
@@ -607,6 +707,11 @@ button[type="submit"] {
     cursor: pointer;
 }
 
+button[type="submit"]:hover,
+button[type="submit"]:focus {
+    border-color: var(--corail);
+}
+
 /************ NOS SUGGESTIONS ************/
 #nos-suggestions h2 {
     font-family: "Bangers", system-ui;
@@ -615,6 +720,7 @@ button[type="submit"] {
     color: var(--beige);
     font-size: var(--font-size-title);
     margin: 25px 0px;
+    letter-spacing: 2px;
 }
 
 /************ FOOTER ************/
@@ -744,7 +850,7 @@ footer p {
     }
 
     /* SECTION VIDEO */
-    #video-player-box {
+    #video-container {
         width: 100%;
         /*élément prend la largeur de l'écran */
         height: auto;

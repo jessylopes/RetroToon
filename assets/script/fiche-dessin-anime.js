@@ -48,8 +48,13 @@ const videoDuration = document.getElementById('duration-time');
 const fullScreenButton = document.getElementById('full-screen');
 const muteButton = document.getElementById('mute-btn');
 const volumeSlider = document.getElementById('volume-slider');
-const videoContainer = document.getElementById('video-player-box');
+const videoContainer = document.getElementById('video-container');
 const videoControlsContainer = document.getElementById('video-controls-container');
+const titleOnVideoContainer = document.getElementById('title-video-container');
+const thumbSlider = document.getElementById('thumb-slider');
+const favoriteButton = document.getElementById('favorite-button');
+const likeButton = document.getElementById('like-button');
+const frame = document.getElementById('frame-video-title-controls');
 
 //fonction pour initialiser le player 
 document.addEventListener('DOMContentLoaded', () => {
@@ -59,8 +64,10 @@ document.addEventListener('DOMContentLoaded', () => {
     fullScreenButton.addEventListener('click', openFullScreen);
     muteButton.addEventListener('click', muteUnmute);
     volumeSlider.addEventListener('change', setVolume);
+    thumbSlider.addEventListener('input', videoTimeUpdate);
 })
 
+/********* RIGHT CONTROLS *********/
 //BOUTON PAUSE ET PLAY 
 function playPause() {
     if (video.paused) {
@@ -72,7 +79,6 @@ function playPause() {
     }
 }
 
-
 //BOUTON 10SEC EN AVANT 
 forwardButton.addEventListener('click', function () {
     video.currentTime += 10;
@@ -83,38 +89,66 @@ rewindButton.addEventListener('click', function () {
     video.currentTime -= 10;
 });
 
-//BARRE DE PROGRESSION QUE LE USER PEUT MANIPULER AVEC SA SOURIS
+//BARRE DE PROGRESSION
+function videoTimeUpdate() {
+    if (video.duration) {
+        //calculer le pourcentage de progression
+        let newTime = (video.currentTime / video.duration) * 100;
+
+        //mettre a jour la barre de progression et le slider
+        progressBar.style.width = newTime + '%';
+        thumbSlider.value = newTime;
+
+        //CURRENT PLAY TIME : on calcule le temps de la vidéo ici
+        let currentMinutes = Math.floor(video.currentTime / 60);
+        let currentSeconds = Math.floor(video.currentTime - currentMinutes * 60);
+        let durationMinutes = Math.floor(video.duration / 60);
+        let durationSeconds = Math.floor(video.duration - durationMinutes * 60);
+        if (currentSeconds < 10) { currentSeconds = `0${currentSeconds}`; }
+        if (durationSeconds < 10) { durationSeconds = `0${durationSeconds}`; }
+        if (currentMinutes < 10) { currentMinutes = `0${currentMinutes}`; }
+        if (durationMinutes < 10) { durationMinutes = `0${durationMinutes}`; }
+
+        videoCurrentTime.innerHTML = currentMinutes + " : " + currentSeconds;
+        videoDuration.innerHTML = durationMinutes + " : " + durationSeconds;
+    }
+}
+
+//MISE À JOUR DU TEMPS ÉCOULÉ SUR LA VIDÉO
 function updateProgress() {
     const progressPercentage = video.duration * (progressBar.value / 100);
     video.currentTime = progressPercentage;
     console.log(video.duration);
     console.log(progressBar.value);
-
-
 }
 
-//BAR DE PROGRESSION
-function videoTimeUpdate() {
-    //BAR DE PROGRESSION QUI SUIT LA VIDEO
-    let newTime = video.currentTime * (100 / video.duration);
-    progressBar.value = newTime;
+//TEMPS MIS À JOUR LORS DU CLIC SUR LA BARRE DE PROGRESSION
+// progressBar.addEventListener("click", function (e) {
+//     let progressWidth = progressBar.clientWidth;
+//     let clickedPosition = e.offsetX;
+//     let clickedTime = (clickedPosition / progressWidth) * video;
+//     video.currentTime = clickedTime;
+// })
 
-    //CURRENT PLAY TIME 
-    let currentMinutes = Math.floor(video.currentTime / 60);
-    let currentSeconds = Math.floor(video.currentTime - currentMinutes * 60);
-    let durationMinutes = Math.floor(video.duration / 60);
-    let durationSeconds = Math.floor(video.duration - durationMinutes * 60);
-    if (currentSeconds < 10) { currentSeconds = `0${currentSeconds}`; }
-    if (durationSeconds < 10) { durationSeconds = `0${durationSeconds}`; }
-    if (currentMinutes < 10) { currentMinutes = `0${currentMinutes}`; }
-    if (durationMinutes < 10) { durationMinutes = `0${durationMinutes}`; }
+// Permet de cliquer sur la barre pour changer l'avancement de la vidéo
+progressBar.addEventListener('input', () => {
+    const seekTime = (progressBar.value / 100) * video.duration;
+    video.currentTime = seekTime;
+});
 
-    videoCurrentTime.innerHTML = currentMinutes + " : " + currentSeconds;
-    videoDuration.innerHTML = durationMinutes + " : " + durationSeconds;
+// Permet de cliquer n'importe où sur la barre et déplacer le thumb slider
+progressBar.addEventListener('click', (e) => {
+    const totalWidth = progressBar.clientWidth;  // Largeur totale du slider
+    const clickX = e.offsetX;  // Position du clic par rapport à l'input
+    const percent = (clickX / totalWidth) * 100;  // Calcul du pourcentage cliqué
 
-}
+    // Ajuste la valeur du slider et de la vidéo en fonction du clic
+    progressBar.value = percent;
+    const seekTime = (percent / 100) * video.duration;
+    video.currentTime = seekTime;
+});
 
-
+/********* LEFT CONTROLS *********/
 // VIDEO EN PLEIN ECRAN OU EN PETIT ECRAN: 
 function openFullScreen() {
     if (fullScreenButton.innerHTML == '<i class="fa-solid fa-expand"></i>') {
@@ -139,31 +173,6 @@ function openFullScreen() {
     }
 }
 
-//VIDEO EN PLEIN ECRAN OU EN PETIT ECRAN
-// function openFullScreen() {
-//     if (!document.fullscreenElement) {
-//         if (videoContainer.requestFullscreen) {
-//             videoContainer.requestFullscreen();
-//         } else if (videoContainer.webkitRequestFullscreen) { /* Pour Safari */
-//             videoContainer.webkitRequestFullscreen();
-//         } else if (videoContainer.msRequestFullscreen) { /* Pour Internet Explorer/Edge */
-//             videoContainer.msRequestFullscreen();
-//         }
-//         fullScreenButton.innerHTML = '<i class="fa-solid fa-compress"></i>';
-//     } else {
-//         if (document.exitFullscreen) {
-//             document.exitFullscreen();
-//         } else if (document.webkitExitFullscreen) { /* Pour Safari */
-//             document.webkitExitFullscreen();
-//         } else if (document.msExitFullscreen) { /* Pour Internet Explorer/Edge */
-//             document.msExitFullscreen();
-//         }
-//         fullScreenButton.innerHTML = '<i class="fa-solid fa-expand"></i>';
-//     }
-// }
-
-
-
 //MUTE ET UNMUTE
 function muteUnmute() {
     if (video.muted) {
@@ -184,23 +193,111 @@ function setVolume() {
     if (volumeSlider.value == 0) {
         video.muted = true; // Mute si le volume est à zéro
         muteButton.innerHTML = '<i class="fa-solid fa-volume-xmark"></i>'; /*= unmute*/
-    } else if (volumeSlider.value > 0) {
+    } else if (volumeSlider.value > 0 && volumeSlider.value < 50) {
         video.muted = false; // Unmute si le volume est supérieur à zéro
-        muteButton.innerHTML = '<i class="fa-solid fa-volume-high"></i>'; /*= mute*/
+        muteButton.innerHTML = '<i class="fa-solid fa-volume-low"></i>'; /*= mute*/
+    } else {
+        muteButton.innerHTML = '<i class="fa-solid fa-volume-high"></i>';
     }
 
 }
 
-//CONTROLS CACHÉS LORS DU PASSAGE DE LA SOURIS
-videoControlsContainer.addEventListener('mouseover', ()=> {
-    videoControlsContainer.style.opacity = 1;
-})
+/* Fonction pour mettre à jour la couleur de la piste */
+//   volumeSlider.addEventListener('input', function() {
+//     const value = this.value;
+//     const max = this.max;
+    
+//     /* Calculer le pourcentage de la valeur actuelle */
+//     const percentage = (value / max) * 100;
+    
+//     /* Mettre à jour la couleur de la piste en utilisant un dégradé linéaire */
+//     this.style.background = `linear-gradient(to right, #4CAF50 ${percentage}%, #ccc ${percentage}%)`;
+//   });
 
-videoControlsContainer.addEventListener('mouseleave', ()=> {
-    videoControlsContainer.style.opacity = 0;
-})
+// volumeSlider.addEventListener('input', function(){
+//     video.volume = volumeSlider.value;
+// })
 
-//COMMENTAIRES
+
+//FRAME QUI CONTIENT LES CONTROLS ET TITRE, EST CACHÉE LORS DU PASSAGE DE LA SOURIS
+// videoContainer.addEventListener('mouseover', () => {
+//     frame.style.opacity = 1;
+// })
+
+// videoContainer.addEventListener('mouseleave', () => {
+//     frame.style.opacity = 0;
+// })
+
+//FRAME QUI DISPARAIT AU BOUT DE TROIS SECONDES QUAND ON EST PLEIN ÉCRAN
+let controlsTimeout;
+let mouseMoveTimeout;
+// Afficher les contrôles lorsque la souris bouge sur la vidéo
+videoContainer.addEventListener('mousemove', () => {
+    clearTimeout(controlsTimeout);
+    clearTimeout(mouseMoveTimeout);
+
+    frame.style.opacity = 1; // Afficher les contrôles
+
+    // Cacher les contrôles si la souris ne bouge plus après 2 secondes
+    mouseMoveTimeout = setTimeout(() => {
+        frame.style.opacity = 0;
+    }, 3000);
+});
+
+// Masquer les contrôles avec un délai lorsque la souris quitte la vidéo
+videoContainer.addEventListener('mouseleave', () => {
+    clearTimeout(mouseMoveTimeout);
+    controlsTimeout = setTimeout(() => {
+        frame.style.opacity = 0;
+    }, 3000);
+});
+
+// Masquer les contrôles avec un délai lorsque la souris quitte le conteneur des contrôles
+videoContainer.addEventListener('mouseleave', () => {
+    clearTimeout(mouseMoveTimeout);
+    controlsTimeout = setTimeout(() => {
+        frame.style.opacity = 0;
+    }, 3000);
+});
+
+
+
+/************ FAVORITE AND LIKE SECTION ************/
+// BOUTON COEUR
+let favorite = false;
+favoriteButton.addEventListener('click', () => {
+    favorite = !favorite;
+
+    if (favorite) {
+        //afficher l'icone "favoris" (coeur plein)
+        favoriteButton.innerHTML = '<i class="fa-solid fa-heart"></i>';
+        favoriteButton.style = 'color: #EB7A57';
+    } else {
+        //afficher l'icone "favoris" (coeur vide)
+        favoriteButton.innerHTML = '<i class="fa-regular fa-heart"></i>';
+        favoriteButton.style = 'color: #FFFAE0';
+
+    }
+});
+
+// BOUTON POUCE LEVÉ
+let liked = false; // Suivre l'état du "like"
+likeButton.addEventListener('click', () => {
+    liked = !liked; // Bascule entre like/unlike
+
+    if (liked) {
+        // Afficher l'icône "like" (pouce levé plein)
+        likeButton.innerHTML = '<i class="fa-solid fa-thumbs-up"></i>';
+        likeButton.style = 'color: #EB7A57';
+    } else {
+        // Afficher l'icône "unlike" (pouce levé vide)
+        likeButton.innerHTML = '<i class="fa-regular fa-thumbs-up"></i>';
+        likeButton.style = 'color: #FFFAE0';
+
+    }
+});
+
+/************ COMMENTAIRES ************/
 //envoi des commentaires
 const inputUser = document.getElementById('input-user');
 const containerGeneralComment = document.getElementById('comment-container')
@@ -225,7 +322,7 @@ function addComment() {
         containerGeneralComment.appendChild(comment);
 
 
-        /************ BOUTON QUI SUPPRIME INDIVIDUELLEMENT LES TACHES ************/
+        /************ BOUTON QUI SUPPRIME INDIVIDUELLEMENT LES COMMENTAIRES ************/
 
         let aSupprimer = document.createElement('span');
         aSupprimer.classList.add('btn-a-supprimer');
