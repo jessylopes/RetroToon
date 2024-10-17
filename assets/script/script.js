@@ -1,6 +1,6 @@
 
 // **********************sous menu
-document.addEventListener('DOMContentLoaded', () => {
+/*document.addEventListener('DOMContentLoaded', () => {
     const accountToggle = document.getElementById('accountToggle');
     const accountSubMenu = document.getElementById('accountSubMenu');
 
@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 // ***********API TMDB**************
-const API_KEY = 'abedd43cf8d6083e8a33eafb9cc8b3f4'; // Clé API pour accéder à l'API de The Movie Database (TMDB)
+/*const API_KEY = 'abedd43cf8d6083e8a33eafb9cc8b3f4'; // Clé API pour accéder à l'API de The Movie Database (TMDB)
 
 // ********************* Années 80 *****************
 // Fonction pour récupérer et afficher les séries TV animées des années 80
@@ -166,10 +166,10 @@ function fetchAndDisplayTVShows1990s() {
 }
 
 // Appel de la fonction pour charger les séries animées des années 90
-fetchAndDisplayTVShows1990s();
+fetchAndDisplayTVShows1990s();*/
 
 //**********************************00's********************** */
-function fetchAndDisplayTVShows2000s() {
+/*function fetchAndDisplayTVShows2000s() {
     const urlTV = `https://api.themoviedb.org/3/discover/tv?api_key=${API_KEY}&with_genres=16&first_air_date.gte=2000-01-01&first_air_date.lte=2009-12-31&language=fr-FR&sort_by=popularity.desc`;
 
     fetch(urlTV)
@@ -351,244 +351,153 @@ function modeEnfant() {
 
 
 // *************************Pages séries par genres
-document.addEventListener('DOMContentLoaded', function() {
+/*const ApiUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=fr-FR&sort_by=popularity.desc&with_genres=16&release_date.gte=1970-01-01&release_date.lte=2010-12-31`;
 
-    // Configuration des carrousels pour les genres
-    const carousels = [
-        { id: 'carousel5', queryParams: '&with_genres=16,35' },   // Animation + Comédie
-        { id: 'carousel6', queryParams: '&with_genres=16,10759' }, // Animation + Action & Adventure
-        { id: 'carousel7', queryParams: '&with_genres=16,10765' },   // Animation + Science-Fiction
-        { id: 'carousel8', queryParams: '&with_genres=16,18' }, // Animation + Drame
-    ];
+let allMovies = []; // Tableau pour stocker tous les films récupérés
 
-    // Fonction pour récupérer et afficher les séries en fonction des paramètres
-    function fetchShowsForCarousel(carouselId, queryParams) {
-        const apiUrl = `https://api.themoviedb.org/3/discover/tv?api_key=${API_KEY}&language=fr-FR&sort_by=popularity.desc&first_air_date.lte=2010-12-31${queryParams}`;
+// Événement DOMContentLoaded pour initialiser le carrousel après le chargement de la page
+document.addEventListener('DOMContentLoaded', function () {
+    const prevButton = document.querySelector('.arrow-left-film');
+    const nextButton = document.querySelector('.arrow-right-film');
+    let currentIndex = 0;
 
-        fetch(apiUrl)
-            .then(response => response.json())
-            .then(data => {
-                const container = document.querySelector(`#${carouselId} .carousel-container`);
-                if (!container) {
-                    console.error(`Le conteneur pour ${carouselId} est introuvable.`);
-                    return;
-                }
+    const itemsPerView = 6; // Nombre d'éléments affichés par défaut
+    let totalMovies = 0; // Nombre total de films récupérés
 
-                container.innerHTML = '';
-
-                data.results.forEach(show => {
-                    const slide = document.createElement('div');
-                    slide.classList.add('carousel-slide', 'card');
-
-                    const img = document.createElement('img');
-                    img.classList.add('poster-comic', 'card-img');
-                    img.src = show.poster_path ? `https://image.tmdb.org/t/p/w500${show.poster_path}` : 'https://via.placeholder.com/200x300?text=No+Image';
-                    img.alt = `Affiche de ${show.name}`;
-                    img.dataset.title = show.name;
-                    img.dataset.description = show.overview || 'Pas de description disponible';
-                    img.dataset.year = show.first_air_date ? show.first_air_date.split('-')[0] : 'N/A';
-                    img.dataset.genre = show.genre_ids.map(id => genreMap[id] || 'Inconnu').join(', ');
-
-                    slide.appendChild(img);
-                    container.appendChild(slide);
-                });
-
-                // Initialiser le carrousel après l'ajout des images
-                initializeCarousel(carouselId);
-            })
-            .catch(error => console.error('Erreur lors de la récupération des données:', error));
+    // Fonction pour récupérer les films d'animation
+    async function fetchAnimationFilms() {
+        try {
+            const response = await fetch(ApiUrl);
+            const data = await response.json();
+            allMovies = data.results; // Stocke les films récupérés
+            totalMovies = allMovies.length; // Met à jour le nombre total de films
+            showAnimationItems(); // Affiche les films
+            updateContainerWidth(); // Met à jour la largeur du conteneur
+            initializeCarouselAnimation(); // Initialise le carrousel après le chargement des films
+        } catch (error) {
+            console.error('Erreur lors de la récupération des films :', error);
+        }
     }
 
-    // Fonction d'initialisation du carrousel
-    function initializeCarousel(carouselId) {
-        const carousel = document.querySelector(`#${carouselId}`);
-        
-        if (!carousel) {
-            console.error(`Carrousel avec l'ID ${carouselId} introuvable.`);
-            return;
+    // Fonction pour afficher les films dans le conteneur
+    function showAnimationItems(startIndex = 0) {
+        animationFilmsContainer.innerHTML = ''; // Efface le conteneur avant d'ajouter de nouveaux éléments
+        const itemsToShow = getSlidesToShow(); // Ajuste le nombre d'éléments à afficher en fonction de la taille de l'écran
+
+        for (let i = startIndex; i < startIndex + itemsToShow && i < allMovies.length; i++) {
+            const film = allMovies[i];
+            const item = document.createElement('div');
+            item.classList.add('animation-item');
+            item.style.backgroundImage = film.poster_path
+                ? `url(https://image.tmdb.org/t/p/w500${film.poster_path})`
+                : 'url(https://via.placeholder.com/500x750?text=No+Image)'; // Image par défaut si l'affiche est absente
+
+            const bodyItem = document.createElement('div');
+            bodyItem.classList.add('animation-body-item');
+            
+            const contentWrapper = document.createElement('div');
+            contentWrapper.classList.add('animation-content-wrapper');
+
+            const title = document.createElement('div');
+            title.classList.add('animation-title');
+            title.textContent = film.title;
+
+            // Ajout des éléments au wrapper
+            contentWrapper.appendChild(title);
+            bodyItem.appendChild(contentWrapper);
+            item.appendChild(bodyItem);
+            animationFilmsContainer.appendChild(item);
+        }
+    }
+
+    // Fonction pour déterminer le nombre d'éléments à afficher en fonction de la taille de l'écran
+    function getSlidesToShow() {
+        if (window.innerWidth <= 480) return 1; // Petit écran
+        if (window.innerWidth <= 767) return 2; // Écran moyen
+        return 6; // Écran large par défaut
+    }
+
+    // Met à jour la largeur du conteneur en fonction du nombre total de films
+    function updateContainerWidth() {
+        const itemsToShow = getSlidesToShow();
+        animationFilmsContainer.style.width = `${(totalMovies / itemsToShow) * 100}%`;
+    }
+
+    // Fonction pour initialiser l'animation du carrousel
+    function initializeCarouselAnimation() {
+        function showCurrentItems() {
+            const itemsToShow = getSlidesToShow();
+            const translateX = -currentIndex * (100 / itemsToShow);
+            animationFilmsContainer.style.transform = `translateX(${translateX}%)`;
         }
 
-        const carouselContainer = carousel.querySelector('.carousel-container');
-        const slides = carousel.querySelectorAll('.carousel-slide');
-        const prevButton = carousel.querySelector('.carousel-control.prev');
-        const nextButton = carousel.querySelector('.carousel-control.next');
-        
-        if (!carouselContainer || slides.length === 0) {
-            console.error(`Le conteneur ou les slides sont introuvables dans le carrousel ${carouselId}.`);
-            return;
-        }
-
-        if (!prevButton || !nextButton) {
-            console.error(`Les boutons de contrôle sont introuvables dans le carrousel ${carouselId}.`);
-            return;
-        }
-
-        let index = 0;
-
-        function getSlidesToShow() {
-            if (window.innerWidth <= 480) {
-                return 1;
-            } else if (window.innerWidth <= 767) {
-                return 2;
+        nextButton.addEventListener('click', () => {
+            const itemsToShow = getSlidesToShow();
+            if (currentIndex + itemsToShow < totalMovies) {
+                currentIndex += itemsToShow;
             } else {
-                return 5;
+                currentIndex = 0; // Revenir au début
             }
-        }
-
-        function goToSlide(index) {
-            const slidesToShow = getSlidesToShow();
-            const slideWidth = slides[0].offsetWidth;
-            const offset = index * slideWidth * slidesToShow;
-            carouselContainer.style.transform = `translateX(-${offset}px)`;
-        }
-
-        function nextSlide() {
-            const slidesToShow = getSlidesToShow();
-            index = (index + slidesToShow) % Math.ceil(slides.length / slidesToShow);
-            goToSlide(index);
-        }
-
-        function prevSlide() {
-            const slidesToShow = getSlidesToShow();
-            index = (index - slidesToShow + Math.ceil(slides.length / slidesToShow)) % Math.ceil(slides.length / slidesToShow);
-            goToSlide(index);
-        }
-
-        prevButton.addEventListener('click', prevSlide);
-        nextButton.addEventListener('click', nextSlide);
-
-        window.addEventListener('resize', () => {
-            goToSlide(index);
+            showCurrentItems();
         });
 
-        console.log(`Carrousel ${carouselId} initialisé avec succès.`);
-    }
-
-    // Initialiser tous les carrousels
-    carousels.forEach(carousel => {
-        fetchShowsForCarousel(carousel.id, carousel.queryParams);
-    });
-});
-
-// ***************************Page films par genres************
-document.addEventListener('DOMContentLoaded', function() {
-    // Configuration des carrousels pour les genres de films d'animation
-    const carousels = [
-        { id: 'carousel9', queryParams: '&with_genres=16,35' }, // Animation + Comédie
-        { id: 'carousel10', queryParams: '&with_genres=16,28' }, // Animation + Aventure
-        { id: 'carousel11', queryParams: '&with_genres=16,14' }, // Animation + Fantastique
-        { id: 'carousel12', queryParams: '&with_genres=16,18' }, // Animation + Drame
-    ];
-
-    // Fonction pour récupérer et afficher les films d'animation en fonction des paramètres
-    function fetchMoviesForCarousel(carouselId, queryParams) {
-        const apiUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=fr-FR&sort_by=popularity.desc&release_date.lte=2010-12-31${queryParams}`;
-
-        fetch(apiUrl)
-            .then(response => response.json())
-            .then(data => {
-                const container = document.querySelector(`#${carouselId} .carousel-container`);
-                if (!container) {
-                    console.error(`Le conteneur pour ${carouselId} est introuvable.`);
-                    return;
-                }
-
-                container.innerHTML = '';
-
-                data.results.forEach(movie => {
-                    const slide = document.createElement('div');
-                    slide.classList.add('carousel-slide', 'card');
-
-                    const img = document.createElement('img');
-                    img.classList.add('poster-comic', 'card-img');
-                    img.src = movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : 'https://via.placeholder.com/200x300?text=No+Image';
-                    img.alt = `Affiche de ${movie.title}`;
-                    img.dataset.title = movie.title;
-                    img.dataset.description = movie.overview || 'Pas de description disponible';
-                    img.dataset.year = movie.release_date ? movie.release_date.split('-')[0] : 'N/A';
-                    img.dataset.genre = movie.genre_ids.map(id => genreMap[id] || 'Inconnu').join(', ');
-
-                    slide.appendChild(img);
-                    container.appendChild(slide);
-                });
-
-                // Initialiser le carrousel après l'ajout des images
-                initializeCarousel(carouselId);
-            })
-            .catch(error => console.error('Erreur lors de la récupération des données:', error));
-    }
-
-    // Fonction d'initialisation du carrousel
-    function initializeCarousel(carouselId) {
-        const carousel = document.querySelector(`#${carouselId}`);
-        
-        if (!carousel) {
-            console.error(`Carrousel avec l'ID ${carouselId} introuvable.`);
-            return;
-        }
-
-        const carouselContainer = carousel.querySelector('.carousel-container');
-        const slides = carousel.querySelectorAll('.carousel-slide');
-        const prevButton = carousel.querySelector('.carousel-control.prev');
-        const nextButton = carousel.querySelector('.carousel-control.next');
-        
-        if (!carouselContainer || slides.length === 0) {
-            console.error(`Le conteneur ou les slides sont introuvables dans le carrousel ${carouselId}.`);
-            return;
-        }
-
-        if (!prevButton || !nextButton) {
-            console.error(`Les boutons de contrôle sont introuvables dans le carrousel ${carouselId}.`);
-            return;
-        }
-
-        let index = 0;
-
-        function getSlidesToShow() {
-            if (window.innerWidth <= 480) {
-                return 1;
-            } else if (window.innerWidth <= 767) {
-                return 2;
+        prevButton.addEventListener('click', () => {
+            const itemsToShow = getSlidesToShow();
+            if (currentIndex - itemsToShow >= 0) {
+                currentIndex -= itemsToShow;
             } else {
-                return 5;
+                currentIndex = Math.floor((totalMovies - 1) / itemsToShow) * itemsToShow;
             }
-        }
-
-        function goToSlide(index) {
-            const slidesToShow = getSlidesToShow();
-            const slideWidth = slides[0].offsetWidth;
-            const offset = index * slideWidth * slidesToShow;
-            carouselContainer.style.transform = `translateX(-${offset}px)`;
-        }
-
-        function nextSlide() {
-            const slidesToShow = getSlidesToShow();
-            index = (index + slidesToShow) % Math.ceil(slides.length / slidesToShow);
-            goToSlide(index);
-        }
-
-        function prevSlide() {
-            const slidesToShow = getSlidesToShow();
-            index = (index - slidesToShow + Math.ceil(slides.length / slidesToShow)) % Math.ceil(slides.length / slidesToShow);
-            goToSlide(index);
-        }
-
-        prevButton.addEventListener('click', prevSlide);
-        nextButton.addEventListener('click', nextSlide);
-
-        window.addEventListener('resize', () => {
-            goToSlide(index);
+            showCurrentItems();
         });
 
-        console.log(`Carrousel ${carouselId} initialisé avec succès.`);
+        window.addEventListener('resize', showCurrentItems); // Met à jour l'affichage lors du redimensionnement
+        showCurrentItems(); // Affichage initial
     }
 
-    // Initialiser tous les carrousels
-    carousels.forEach(carousel => {
-        fetchMoviesForCarousel(carousel.id, carousel.queryParams);
+    // Appel initial pour récupérer et afficher les films d'animation
+    fetchAnimationFilms();
+});*/
+
+document.addEventListener('DOMContentLoaded', function () {
+    const carousel = document.getElementById('carousel0');
+    const container = carousel.querySelector('.carousel-container');
+    const slides = Array.from(container.querySelectorAll('.carousel-slide'));
+    const prevButton = carousel.querySelector('.prev');
+    const nextButton = carousel.querySelector('.next');
+
+    let currentSlide = 0;
+    const slideWidth = slides[0].offsetWidth; // Supposant que toutes les diapositives ont la même largeur
+
+    // Position initiale du carrousel
+    container.style.transform = `translateX(${-currentSlide * slideWidth}px)`;
+
+    // Fonction pour mettre à jour la position des diapositives
+    function updateSlidePosition() {
+        container.style.transition = 'transform 0.3s ease-in-out'; // Animation plus rapide
+        container.style.transform = `translateX(${-currentSlide * slideWidth}px)`;
+    }
+
+    // Gestionnaire d'événements pour le bouton suivant
+    nextButton.addEventListener('click', () => {
+        if (currentSlide < slides.length - 1) {
+            currentSlide++;
+        } else {
+            currentSlide = 0; // Revenir à la première diapositive
+        }
+        updateSlidePosition();
+    });
+
+    // Gestionnaire d'événements pour le bouton précédent
+    prevButton.addEventListener('click', () => {
+        if (currentSlide > 0) {
+            currentSlide--;
+        } else {
+            currentSlide = slides.length - 1; // Revenir à la dernière diapositive
+        }
+        updateSlidePosition();
     });
 });
-
 
 
 

@@ -35,61 +35,52 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 /************************         FONCTION DE MAIN PAGE PARAMETRE       ********************/
-//menu deroulant
-function toggleContent(contentId) {
-    // Récupère tous les éléments de contenu caché
-    const allContent = document.querySelectorAll('.panel');
 
-    // Boucle pour cacher tous les contenus
-    allContent.forEach(content => {
-        content.style.display = "none"; // Cache tout le contenu
+// Fonction pour cacher tous les pages et afficher que la page demandée
+function afficherPage(pageId) {
+    const pages = document.querySelectorAll('.page');
+    pages.forEach(page => {
+        page.classList.remove('active');
     });
-
-    // Affiche le contenu correspondant au bouton cliqué
-    const selectedContent = document.getElementById(contentId);
-    selectedContent.style.display = "block"; // Affiche le contenu cliqué
-}
-
-
-// Fonction pour initialiser l'affichage au chargement de la page
-function init() {
-    // Ouvre le premier panel par défaut
-    const firstPanel = document.querySelector('.panel'); // Sélectionne le premier panel
-    if (firstPanel) {
-        firstPanel.style.display = "block"; // Affiche le premier panel
+    const pageActive = document.getElementById(pageId);
+    if (pageActive) {
+        pageActive.classList.add('active');
     }
 }
+//les boutons de retour
+document.querySelectorAll('.choixParametre').forEach(element => {
+    element.addEventListener('click', () => {
+        const targetPage = element.getAttribute('data-page');
+        afficherPage(targetPage);
+    });
+});
+document.querySelectorAll('.retourPage').forEach(element => {
+    element.addEventListener('click', () => {
+        const targetPage = element.getAttribute('data-page');
+        afficherPage(targetPage);
+    });
+});
 
-function getSlidesToShow() {
-    if (window.innerWidth <= 480) {
-        window.removeEventListener('resize', getSlidesToShow);
+document.getElementById('saveCodeButton').addEventListener('click', function () {
+    const codeInput = document.getElementById('code').value;
+    const messageElement = document.getElementById('message');
+
+    // Vérification que le code est composé de quatre chiffres uniquement
+    if (/^\d{4}$/.test(codeInput)) {
+        // Enregistrer le code parental dans le stockage local (ou toute autre méthode de stockage)
+        localStorage.setItem('parentalCode', codeInput);
+        messageElement.textContent = 'Code parental enregistré avec succès !';
+        messageElement.style.color = 'green';
     } else {
-        window.onload = init
+        messageElement.textContent = 'Veuillez entrer un code à 4 chiffres uniquement.';
+        messageElement.style.color = 'red';
     }
-}
-getSlidesToShow()
+});
 
-window.addEventListener('resize', getSlidesToShow)
+const logOut = document.querySelector('.choixParametre[data-page="page-gestion-compte-6"]');
+logOut.addEventListener('click', function () {
+    localStorage.removeItem('authToken');
+    sessionStorage.removeItem('authToken');
 
-
-
-const acc = document.getElementsByClassName("gestion");
-let i;
-
-for (i = 0; i < acc.length; i++) {
-    acc[i].addEventListener("click", function () {
-        this.classList.toggle("active");
-
-        let contenuCache = this.nextElementSibling;
-        if (contenuCache.style.display === "block") {
-            contenuCache.style.display = "none";
-        } else {
-            contenuCache.style.display = "block";
-        }
-    });
-}
-
-/* function modeEnfant() {
-    // Basculer entre le mode Enfant et Adulte en ajoutant ou supprimant la classe 'mode-enfant'
-    document.body.classList.toggle('mode-enfant');
-} */
+    window.location.href = '/html/index.html';
+})
