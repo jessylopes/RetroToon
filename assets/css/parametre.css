@@ -213,7 +213,7 @@ padding-top: 40px;
     color: #FFFAE0;
     font-family: 'Bangers', cursive;
     font-weight: normal;
-    font-size: 30px;
+    font-size: 26px;
     letter-spacing: 3px;
 }
 .containerParametre {
@@ -467,5 +467,7 @@ footer p {
     margin-top: 20px;
     font-family: Fredoka;
 }
-
+footer a{
+    text-decoration: none;
+}
 /*****************************   RESPONSIVE   ******************************/
